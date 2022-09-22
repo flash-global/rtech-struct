@@ -171,7 +171,7 @@ describe('Request object structure', () => {
     test('Request default extras', () => {
         delete request.extras
 
-        const [error, data] = s.validate(request, Request, { coerce: true })
+        const [error, data] = s.validate(request, Request, {coerce: true})
 
         expect(error).toBeUndefined()
         expect(data).toHaveProperty('extras', [])
@@ -182,7 +182,7 @@ describe('Request object structure', () => {
             'bill_to': '82SKOREWAY2',
             'currency': 'EUR'
         }
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
@@ -193,128 +193,128 @@ describe('Request object structure', () => {
                 'value': 'Field value'
             }
         ]
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with references', () => {
-        request.references=[
+        request.references = [
             {
                 'label': 'Reference One',
                 'value': 'Field value'
             }
         ]
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with order_type getitnow', () => {
-        request.order_type=
+        request.order_type =
             {
                 'type': 'getitnow',
                 'amount': 500
             }
 
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with order_type spot', () => {
-        request.order_type=
+        request.order_type =
             {
                 'type': 'spot'
             }
 
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with order_type agreed-price', () => {
-        request.order_type=
+        request.order_type =
             {
                 'type': 'agreed-price'
             }
 
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with order_type marketplace_spot', () => {
-        request.order_type=
+        request.order_type =
             {
                 'type': 'marketplace_spot',
                 'delegated_target': ['carrier1', 'carrier2'],
             }
 
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with order_type virtual_order', () => {
-        request.order_type=
+        request.order_type =
             {
                 'type': 'virtual_order'
             }
 
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with validity_time', () => {
         request.validity_time = {
-            'valid_from':'2021-05-06T15:15:00Z',
-            'valid_until':'2021-05-06T15:15:00+0200',
+            'valid_from': '2021-05-06T15:15:00Z',
+            'valid_until': '2021-05-06T15:15:00+0200',
         }
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with validity_time and decision_time and defaulted close_after', () => {
         request.validity_time = {
-            'valid_from':'2021-05-06T15:15:00Z',
-            'valid_until':'2021-05-06T15:15:00+0200',
+            'valid_from': '2021-05-06T15:15:00Z',
+            'valid_until': '2021-05-06T15:15:00+0200',
         }
         request.validity_time.decision_time = {
             'decision_from': '2021-05-06T15:15:00Z',
         }
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request with validity_time and decision_time and setted close_after', () => {
         request.validity_time = {
-            'valid_from':'2021-05-06T15:15:00Z',
-            'valid_until':'2021-05-06T15:15:00+0200',
+            'valid_from': '2021-05-06T15:15:00Z',
+            'valid_until': '2021-05-06T15:15:00+0200',
         }
         request.validity_time.decision_time = {
             'decision_from': '2021-05-06T15:15:00Z',
             'close_after': true,
         }
 
-        const [error] = s.validate(request, Request, { coerce: true })
+        const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request target not empty', () => {
         request.creator = 'E4P'
-        request.target= ['ATS', 'INTIME']
+        request.target = ['ATS', 'INTIME']
 
-        const [error, data] = s.validate(request, Request, { coerce: true })
+        const [error, data] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 
     test('Request have comment', () => {
         request.comment = 'A simple comment'
 
-        const [error, data] = s.validate(request, Request, { coerce: true })
+        const [error, data] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
 
         expect(data).toHaveProperty('comment', 'A simple comment')
@@ -325,7 +325,14 @@ describe('Request object structure', () => {
             email: 'jdoe@flash-global.net'
         }
 
-        const [error, data] = s.validate(request, Request, { coerce: true })
+        const [error, data] = s.validate(request, Request, {coerce: true})
+        expect(error).toBeUndefined()
+    })
+
+    test('Request have multiple source', () => {
+        request.source = ['S1', 'S2']
+
+        const [error, data] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
 })
