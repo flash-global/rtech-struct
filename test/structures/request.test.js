@@ -256,12 +256,9 @@ describe('Request object structure', () => {
     })
 
     test('Request with order_type virtual_order', () => {
-        request.order_type =
-            {
-                'type': 'virtual_order'
-            }
-
-
+        request.order_type = {
+            'type': 'virtual_order'
+        }
         const [error] = s.validate(request, Request, {coerce: true})
         expect(error).toBeUndefined()
     })
