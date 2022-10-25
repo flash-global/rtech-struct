@@ -97,6 +97,27 @@ const checkValidityTime = (time) => {
     }
 }
 
+const extraVehicles = (vehicles, extras) => {
+    if (extras && extras.length > 0) {
+        const options = [
+            'SIDE_LOAD',
+            'TAIL_LIFT'
+        ]
+        for (const option of options) {
+            if (extras.includes(option)) {
+                vehicles = vehicles.map((vehicle) => {
+                    vehicle = vehicle + '_' + option
+                    return vehicle
+                })
+            }
+        }
+    }
+    vehicles = vehicles.map((vehicle) => {
+        return vehicle.toLowerCase()
+    })
+    return vehicles
+}
+
 /**
  * Tool to transform request into auction.
  * @param {Object} request - The request object.
@@ -122,7 +143,7 @@ const requestToAuction = (request, defaultOption = {}) => {
         notes: request.comment,
         extras: request.extras,
         incoterm: request.transports[0].incoterm,
-        vehicles: request.transports[0].vehicles
+        vehicles: extraVehicles(request.transports[0].vehicles, request.extras)
     }
 }
 

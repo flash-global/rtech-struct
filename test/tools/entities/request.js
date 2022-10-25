@@ -118,7 +118,7 @@ module.exports = {
                 "a",
                 "B"
             ],
-            "vehicles": [],
+            "vehicles": ["PL5"],
             "distances": [
                 468,
                 308
@@ -128,7 +128,7 @@ module.exports = {
     "source": [
         "82SKOREWAY2"
     ],
-    "extras": [],
+    "extras": ["SIDE_LOAD"],
     "references": [
         {
             "label": "WBS",

@@ -15,6 +15,7 @@ module.exports = {
         "FR",
         "Europe/Paris"
     ],
+    extras: ["SIDE_LOAD"],
     puLocation: ['48.6987', '6.1597'],
     puContact: [
         "test comma",
@@ -22,6 +23,7 @@ module.exports = {
         "test@test.com",
         "+330102030405"
     ],
+    vehicles: ["pl5_side_load"],
     puDate: '2022-09-15T16:30:00.000Z',
     puDateRange: '2022-09-15T20:30:00.000Z',
     dePlace: [

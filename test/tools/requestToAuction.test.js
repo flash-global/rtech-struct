@@ -31,6 +31,8 @@ describe('request to auction tool', () => {
         expect(r.puLocation).toStrictEqual(auction.puLocation)
         expect(r.deLocation).toStrictEqual(auction.deLocation)
         expect(r.dimension).toStrictEqual(auction.dimension)
+        expect(r.vehicles).toStrictEqual(auction.vehicles)
+        expect(r.extras).toStrictEqual(auction.extras)
     })
 
     test('validate auction struct', () => {
