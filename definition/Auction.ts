@@ -49,6 +49,7 @@ type Auction = {
     notes?: string,
     bid?: Bid,
     tags: string[],
+    scoring_process?: string,
 };
 
 export default Auction;

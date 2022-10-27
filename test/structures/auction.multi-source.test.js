@@ -331,4 +331,27 @@ describe('Auction object structure', () => {
         expect(error).toBeDefined()
         expect(error).toHaveProperty('path', ['tags', 1])
     })
+
+    test('Success: scoring_process', () => {
+        const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+        auction.scoring_process = 'test'
+        const [error, entity] = s.validate(auction, AuctionStruct, {
+            coerce: true, mask: true
+        })
+        expect(error).toBeUndefined()
+        expect(entity).toHaveProperty('scoring_process', 'test')
+    })
+
+    test('Failed: scoring_process', () => {
+        const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+        auction.scoring_process = 666
+        const [error, entity] = s.validate(auction, AuctionStruct, {
+            coerce: true, mask: true
+        })
+        expect(entity).toBeUndefined()
+        expect(error).toBeDefined()
+        expect(error).toHaveProperty('key', 'scoring_process')
+    })
 })
