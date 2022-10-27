@@ -77,6 +77,7 @@ describe('Auction object structure', () => {
         }
         expect(val0.puPlace).toEqual(["630 rue salvadore allende", "57390", "audin-le-tiche", "France", "FR"])
     })
+
     test('Success: Default Auction structure', () => {
         const [err0, val0] = s.validate(Auctions[0], AuctionStruct, {
             coerce: true, mask: true
@@ -84,6 +85,7 @@ describe('Auction object structure', () => {
         expect(err0).toBeUndefined()
         expect(val0).toBeDefined()
     })
+
     test('Success: Default Multistep auction structure', () => {
         const [err0, val0] = s.validate(Auctions[1], AuctionStruct, {
             coerce: true, mask: true
@@ -91,6 +93,7 @@ describe('Auction object structure', () => {
         expect(err0).toBeUndefined()
         expect(val0).toBeDefined()
     })
+
     test('Success: Multisource auction structure', () => {
         const [err0, val0] = s.validate(Auctions[0], AuctionStruct, {
             coerce: true, mask: true
@@ -99,6 +102,7 @@ describe('Auction object structure', () => {
         expect(val0).toBeDefined()
         expect(val0.source).toEqual(["DEMO", "TOTO", "RANDOM"])
     })
+
     let AuctionF1 = JSON.parse(JSON.stringify(Auctions[0]))
     AuctionF1.puContact = ["Doom Center", "Laurent", "lav@yoctu.com", "toto"]
     test('Failed: Phone Auction structure', () => {
@@ -109,6 +113,7 @@ describe('Auction object structure', () => {
         expect(err1).toHaveProperty('type', 'string')
         expect(val1).toBeUndefined()
     })
+
     let AuctionF2 = JSON.parse(JSON.stringify(Auctions[0]))
     AuctionF2.puContact = ["Doom Center", "Laurent", "NA", "0011111111"]
     test('Failed: Email Auction structure', () => {
@@ -119,23 +124,28 @@ describe('Auction object structure', () => {
         expect(err2).toHaveProperty('type', 'Email')
         expect(val2).toBeUndefined()
     })
+
     let AuctionF3 = JSON.parse(JSON.stringify(Auctions[0]))
-    AuctionF3.puPlace = ["630 rue salvadore allende", "57390", "audin-le-tiche", "France", "FR", "Europe/Paris"],
-        test('Succes: PuPlace timezone string Auction structure', () => {
-            const [err3, val3] = s.validate(AuctionF3, AuctionStruct, {
-                coerce: true, mask: true
-            })
-            expect(err3).toBeUndefined()
+    AuctionF3.puPlace = ["630 rue salvadore allende", "57390", "audin-le-tiche", "France", "FR", "Europe/Paris"]
+    test('Succes: PuPlace timezone string Auction structure', () => {
+        const [err3, val3] = s.validate(AuctionF3, AuctionStruct, {
+            coerce: true, mask: true
         })
+        expect(err3).toBeUndefined()
+        expect(val3).toBeDefined()
+    })
+
     let AuctionF4 = JSON.parse(JSON.stringify(Auctions[0]))
-    AuctionF4.puPlace = ["630 rue salvadore allende", "57390", "audin-le-tiche", "France", "FR", "My/Country"],
-        test('Failed: PuPlace unknown timezone string Auction structure', () => {
-            const [err4, val4] = s.validate(AuctionF4, AuctionStruct, {
-                coerce: true, mask: true
-            })
-            expect(err4).toBeDefined()
-            expect(err4).toHaveProperty('type', 'Tz')
+    AuctionF4.puPlace = ["630 rue salvadore allende", "57390", "audin-le-tiche", "France", "FR", "My/Country"]
+    test('Failed: PuPlace unknown timezone string Auction structure', () => {
+        const [err4, val4] = s.validate(AuctionF4, AuctionStruct, {
+            coerce: true, mask: true
         })
+        expect(val4).toBeUndefined()
+        expect(err4).toBeDefined()
+        expect(err4).toHaveProperty('type', 'Tz')
+    })
+
     let AuctionF5 = JSON.parse(JSON.stringify(Auctions[0]))
     AuctionF5.targetOwner = ["ftaggart"]
     AuctionF5.sourceOwner = ["llaffer"]
@@ -147,6 +157,7 @@ describe('Auction object structure', () => {
         expect(val5).toHaveProperty('targetOwner', ['ftaggart'])
         expect(val5).toHaveProperty('sourceOwner', ['llaffer'])
     })
+
     let AuctionF6 = JSON.parse(JSON.stringify(Auctions[0]))
     delete AuctionF6.puPlace
     test('Failed: missing puPlace auction structure', () => {

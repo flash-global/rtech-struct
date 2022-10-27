@@ -54,7 +54,9 @@ exports.bid = function (config = null, auction = null) {
       score: s.optional(s.array(s.union([s.number(), s.string()]))),
       tms: s.optional(s.string()),
       price: s.union([s.number(), s.string()]),
-      priceDetails: s.optional(s.array(s.string()))
+      priceDetails: s.optional(s.array(s.string())),
+      bid_score: s.optional(s.number()),
+      scoring_process: s.optional(s.size(s.string(), 2, 254))
     }), {
     id: require('uuid').v4(),
     key: auction && auction.key ? auction.key : "",
