@@ -77,8 +77,7 @@ exports.auction = function (config = null) {
         stackable: s.optional(s.enums(['yes', 'no', 'No', 'Yes', 0, 1])),
         distance: s.optional(s.union([s.number(), s.string()])),
         notes: notes,
-        tags: s.defaulted(s.optional(s.array(s.string())), []),
-        scoring_process: s.optional(s.size(s.string(), 2, 254))
+        tags: s.defaulted(s.optional(s.array(s.string())), [])
     })
 
     const values = {
