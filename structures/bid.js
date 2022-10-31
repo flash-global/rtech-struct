@@ -81,7 +81,6 @@ exports.bid = function (config = null, auction = null) {
     deDate: auction && auction.deDate ? auction.deDate : new Date().toISOString(),
     deDateRange: auction && auction.deDateRange ? auction.deDateRange : new Date().toISOString(),
     validatorEmails: Validatoremail,
-    logo: Logo,
-    options: []
+    logo: Logo
   })
 }

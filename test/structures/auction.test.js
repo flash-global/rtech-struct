@@ -33,7 +33,7 @@ const Auctions = [
         key: "jest-" + Math.round((new Date()).getTime()),
         source: ["DEMO"],
         target: ["DEMOEX"],
-        options: ["MULTISTEP", "ALLOW_EXPIRED_BID_EXTENSION"],
+        options: ["MULTISTEP"],
         puPlace: ["630 rue salvadore allende", "57390", "audin-le-tiche", "France", "FR"],
         puLocation: "49.4748422,5.9388295",
         puContact: ["Doom Center", "Laurent", "lav@yoctu.com", "+333333333"],
@@ -79,6 +79,15 @@ describe('Auction object structure', () => {
     })
     test('Success: Default Auction structure', () => {
         const [err0, val0] = s.validate(Auctions[0], AuctionStruct, {
+            coerce: true, mask: true
+        })
+        expect(err0).toBeUndefined()
+        expect(val0).toBeDefined()
+    })
+    test('Success: Default Auction structure with "ALLOW_EXPIRED_BID_EXTENSION" option', () => {
+        let payload = JSON.parse(JSON.stringify(Auctions[0]));
+        payload.options = ['ALLOW_EXPIRED_BID_EXTENSION'];
+        const [err0, val0] = s.validate(payload, AuctionStruct, {
             coerce: true, mask: true
         })
         expect(err0).toBeUndefined()
