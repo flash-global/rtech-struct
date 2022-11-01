@@ -92,6 +92,7 @@ describe('Auction object structure', () => {
         })
         expect(err0).toBeUndefined()
         expect(val0).toBeDefined()
+        expect(val0.options).toStrictEqual(['ALLOW_EXPIRED_BID_EXTENSION'])
     })
     test('Success: Default Multistep auction structure', () => {
         const [err0, val0] = s.validate(Auctions[1], AuctionStruct, {
