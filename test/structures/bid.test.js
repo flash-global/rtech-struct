@@ -77,6 +77,7 @@ describe('Bid object structure', () => {
     })
     expect(err0).toBeUndefined()
     expect(val0).toBeDefined()
+    expect(val0.options).toStrictEqual(['ALLOW_EXTEND_ON_EXPIRED'])
   })
   test('Failed: Bid structure with invalid option value', () => {
       let payload = JSON.parse(JSON.stringify(Bids[0]));
