@@ -69,6 +69,26 @@ describe('Bid object structure', () => {
     expect(val0).toBeDefined()
   })
 
+  test('Success: Bid structure with ALLOW_EXTEND_ON_EXPIRED as options', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+    payload.options = ['ALLOW_EXTEND_ON_EXPIRED'];
+    const [err0, val0] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err0).toBeUndefined()
+    expect(val0).toBeDefined()
+    expect(val0.options).toStrictEqual(['ALLOW_EXTEND_ON_EXPIRED'])
+  })
+  test('Failed: Bid structure with invalid option value', () => {
+      let payload = JSON.parse(JSON.stringify(Bids[0]));
+      payload.options = ['SOME_WRONG_VALUE'];
+      const [err0, val0] = s.validate(payload, BidStruct, {
+          coerce: true, mask: true
+      })
+      expect(err0).toBeDefined()
+      expect(val0).toBeUndefined()
+  })
+
   test('Success: Bid structure with Yes as loaded', () => {
     let payload = JSON.parse(JSON.stringify(Bids[0]));
     payload.loaded = "Yes";
