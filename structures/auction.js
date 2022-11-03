@@ -1,7 +1,7 @@
 const s = require('superstruct')
 const Uuid = s.define('Uuid', require('is-uuid').v4)
 const Url = s.define('Url', require('is-url'))
-const { ZuluDateTimeStruct } = require('./lib');
+const { ZuluDateTimeStruct, dateUtc } = require('./lib');
 const GpsA = require('./lib').gpsarray(s)
 const GpsS = require('./lib').gpsstring(s)
 const { placeChecker } = require('./place')
@@ -77,7 +77,11 @@ exports.auction = function (config = null) {
         stackable: s.optional(s.enums(['yes', 'no', 'No', 'Yes', 0, 1])),
         distance: s.optional(s.union([s.number(), s.string()])),
         notes: notes,
-        tags: s.defaulted(s.optional(s.array(s.string())), [])
+        tags: s.defaulted(s.optional(s.array(s.string())), []),
+        puDateUtc: s.optional(dateUtc()),
+        puDateRangeUtc: s.optional(dateUtc()),
+        deDateUtc: s.optional(dateUtc()),
+        deDateRangeUtc: s.optional(dateUtc())
     })
 
     const values = {

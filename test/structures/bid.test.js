@@ -174,4 +174,81 @@ describe('Bid object structure', () => {
     expect(err0).toBeUndefined()
     expect(val0).toBeDefined()
   })
+
+  test('Success: UTC dates valid', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.puDateUtc = '2022-11-03T14:02:21Z'
+    payload.puDateRangeUtc = '2022-11-03T14:02:21Z'
+    payload.deDateUtc = '2022-11-03T14:02:21Z'
+    payload.deDateRangeUtc = '2022-11-03T14:02:21Z'
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeUndefined()
+    expect(val).toBeDefined()
+  })
+
+  test('Failed: UTC string date invalid', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.puDateUtc = new Date().toUTCString()
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeDefined()
+    expect(val).toBeUndefined()
+    expect(err).toHaveProperty('key', 'puDateUtc')
+  })
+
+  test('Failed: UTC date invalid', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.puDateUtc = '2022-11-03T14:02:21Z'
+    payload.puDateRangeUtc = '2022-11-03T14:02:21Z'
+    payload.deDateUtc = 'blah2022-11-03T14:02:21Z'
+    payload.deDateRangeUtc = '2022-11-03T14:02:21Z'
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeDefined()
+    expect(val).toBeUndefined()
+    expect(err).toHaveProperty('key', 'deDateUtc')
+  })
+
+  test('Failed: UTC date invalid (date Object)', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.deDateUtc = new Date()
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeDefined()
+    expect(val).toBeUndefined()
+    expect(err).toHaveProperty('key', 'deDateUtc')
+  })
+
+  test('Failed: UTC date invalid (ISO string)', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.deDateUtc = new Date().toISOString()
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeDefined()
+    expect(val).toBeUndefined()
+    expect(err).toHaveProperty('key', 'deDateUtc')
+  })
+
+  test('Failed: UTC date invalid (other format)', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.deDateUtc = '10/01/2022'
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeDefined()
+    expect(val).toBeUndefined()
+    expect(err).toHaveProperty('key', 'deDateUtc')
+  })
 })
