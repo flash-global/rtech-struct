@@ -189,7 +189,7 @@ describe('Bid object structure', () => {
     expect(val).toBeDefined()
   })
 
-  test('Success: UTC dates invalid', () => {
+  test('Failed: UTC dates invalid', () => {
     let payload = JSON.parse(JSON.stringify(Bids[0]));
 
     payload.puDateUtc = '2022-11-03T14:02:21Z'
