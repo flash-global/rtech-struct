@@ -24,6 +24,7 @@ exports.bid = function (config = null, auction = null) {
       key: s.size(s.string(), 8, 128),
       from: s.size(s.string(), 0, 128),
       status: s.enums(['created', 'cancelled', 'running', 'expired', 'declined', 'forwarded', 'authorized']),
+      status_reason: s.optional(s.size(s.string(), 0, 254)),
       reported_at: ZuluDateTimeStruct,
       archived_at: s.optional(ZuluDateTimeStruct),
       valid_until: ZuluDateTimeStruct,

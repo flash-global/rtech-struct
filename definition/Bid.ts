@@ -4,6 +4,7 @@ type Bid = {
     key: string,
     from: string,
     status: 'created' | 'cancelled' | 'running' | 'expired' | 'declined' | 'forwarded' | 'authorized',
+    status_reason?: string,
     reported_at: string,
     archived_at?: string,
     valid_until: string,
