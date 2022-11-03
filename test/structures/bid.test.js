@@ -174,4 +174,33 @@ describe('Bid object structure', () => {
     expect(err0).toBeUndefined()
     expect(val0).toBeDefined()
   })
+
+  test('Success: UTC dates valid', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.puDateUtc = '2022-11-03T14:02:21Z'
+    payload.puDateRangeUtc = '2022-11-03T14:02:21Z'
+    payload.deDateUtc = '2022-11-03T14:02:21Z'
+    payload.deDateRangeUtc = '2022-11-03T14:02:21Z'
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeUndefined()
+    expect(val).toBeDefined()
+  })
+
+  test('Success: UTC dates invalid', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.puDateUtc = '2022-11-03T14:02:21Z'
+    payload.puDateRangeUtc = '2022-11-03T14:02:21Z'
+    payload.deDateUtc = 'blah2022-11-03T14:02:21Z'
+    payload.deDateRangeUtc = '2022-11-03T14:02:21Z'
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeDefined()
+    expect(val).toBeUndefined()
+    expect(err).toHaveProperty('key', 'deDateUtc')
+  })
 })

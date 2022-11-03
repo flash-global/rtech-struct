@@ -322,4 +322,33 @@ describe('Auction object structure', () => {
         expect(error).toBeDefined()
         expect(error).toHaveProperty('path', ['tags', 1])
     })
+
+    test('Success: valid UTC dates', () => {
+        const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+        auction.puDateUtc = '2022-11-03T14:02:21Z'
+        auction.puDateRangeUtc = '2022-11-03T14:02:21Z'
+        auction.deDateUtc = '2022-11-03T14:02:21Z'
+        auction.deDateRangeUtc = '2022-11-03T14:02:21Z'
+        const [error, entity] = s.validate(auction, AuctionStruct, {
+            coerce: true, mask: true
+        })
+        expect(entity).toBeDefined()
+        expect(error).toBeUndefined()
+    })
+
+    test('Failed: invalid UTC dates', () => {
+        const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+        auction.puDateUtc = '2022-11-03T14:02:21Z'
+        auction.puDateRangeUtc = '2022-11-03T14:02:21Z'
+        auction.deDateUtc = 'blah2022-11-03T14:02:21Z'
+        auction.deDateRangeUtc = '2022-11-03T14:02:21Z'
+        const [error, entity] = s.validate(auction, AuctionStruct, {
+            coerce: true, mask: true
+        })
+        expect(entity).toBeUndefined()
+        expect(error).toBeDefined()
+        expect(error).toHaveProperty('key', 'deDateUtc')
+    })
 })
