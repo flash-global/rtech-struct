@@ -337,6 +337,18 @@ describe('Auction object structure', () => {
         expect(error).toBeUndefined()
     })
 
+    test('Failed: invalid UTC string date', () => {
+        const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+        auction.puDateUtc = new Date().toUTCString()
+        const [error, entity] = s.validate(auction, AuctionStruct, {
+            coerce: true, mask: true
+        })
+        expect(entity).toBeUndefined()
+        expect(error).toBeDefined()
+        expect(error).toHaveProperty('key', 'puDateUtc')
+    })
+
     test('Failed: invalid UTC date', () => {
         const auction = JSON.parse(JSON.stringify(Auctions[0]))
 

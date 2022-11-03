@@ -189,6 +189,18 @@ describe('Bid object structure', () => {
     expect(val).toBeDefined()
   })
 
+  test('Failed: UTC string date invalid', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.puDateUtc = new Date().toUTCString()
+    const [err, val] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err).toBeDefined()
+    expect(val).toBeUndefined()
+    expect(err).toHaveProperty('key', 'puDateUtc')
+  })
+
   test('Failed: UTC date invalid', () => {
     let payload = JSON.parse(JSON.stringify(Bids[0]));
 
