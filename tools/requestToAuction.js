@@ -142,7 +142,7 @@ const requestToAuction = (request, defaultOption = {}) => {
         extras: request.extras,
         incoterm: request.transports[0].incoterm,
         vehicles: request.transports[0].vehicles,
-        transports: [request.packages[0].package_type]
+        transport: [request.packages[0].package_type]
     }
 }
 
