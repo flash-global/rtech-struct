@@ -123,4 +123,5 @@ module.exports = {
         "2022-09-16T16:45:00.000Z"
     ],
     distance: 776,
+    transports: ["parcel"]
 }
