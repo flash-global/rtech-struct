@@ -15,7 +15,7 @@ type Auction = {
     waybills?: string,
     creator: string,
     visible: 'public' | 'private',
-    options: Array<'SHAQUPLOAD' | 'BIDUPLOAD' | 'AUTOINVITE' | 'BIDCOMMENT' | 'NOCHAT' | 'LITE' | 'PRICE_DETAIL' | 'SHOW_CONTACT' | 'PKG_V1' | 'PKG_V2' | 'MULTISTEP' | 'CLOSE_AFTER_DECISION_FROM' | 'SECRET_GETITNOW' | 'BID_SCORING_PRICE'>,
+    options: Array<'SHAQUPLOAD' | 'BIDUPLOAD' | 'AUTOINVITE' | 'BIDCOMMENT' | 'NOCHAT' | 'LITE' | 'PRICE_DETAIL' | 'SHOW_CONTACT' | 'PKG_V1' | 'PKG_V2' | 'MULTISTEP' | 'CLOSE_AFTER_DECISION_FROM' | 'SECRET_GETITNOW' | 'BID_SCORING_PRICE' | 'ALLOW_EXPIRED_BID_EXTENSION'>,
     source: string[],
     target: string[],
     targetStatus?: Array<'' | 'Removed' | 'Disabled' | 'Searching' | 'NoSolution'>,
