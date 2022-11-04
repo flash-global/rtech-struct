@@ -5,7 +5,7 @@ const { ZuluDateTimeStruct, dateUtc } = require('./lib');
 const GpsA = require('./lib').gpsarray(s)
 const GpsS = require('./lib').gpsstring(s)
 const { placeChecker } = require('./place')
-const {multistep, packageV2, packageV1} = require('./multistep')
+const { multistep, packageV2, packageV1 } = require('./multistep')
 const { notes } = require('./notes');
 const Contact = require('./contact').auctionContact
 
@@ -33,7 +33,7 @@ exports.auction = function (config = null) {
         waybills: s.optional(s.size(s.string(), 8, 256)),
         creator: s.size(s.string(), 2, 32),
         visible: s.enums(['public', 'private']),
-        options: s.optional(s.array(s.enums(['SHAQUPLOAD', 'BIDUPLOAD', 'AUTOINVITE', 'BIDCOMMENT', 'NOCHAT', 'LITE', 'PRICE_DETAIL', 'SHOW_CONTACT', 'PKG_V1', 'PKG_V2', 'MULTISTEP', 'CLOSE_AFTER_DECISION_FROM', 'SECRET_GETITNOW', 'ALLOW_EXPIRED_BID_EXTENSION']))),
+        options: s.optional(s.array(s.enums(['SHAQUPLOAD', 'BIDUPLOAD', 'AUTOINVITE', 'BIDCOMMENT', 'NOCHAT', 'LITE', 'PRICE_DETAIL', 'SHOW_CONTACT', 'PKG_V1', 'PKG_V2', 'MULTISTEP', 'CLOSE_AFTER_DECISION_FROM', 'SECRET_GETITNOW', 'ALLOW_EXPIRED_BID_EXTENSION' | 'BID_SCORING_PRICE']))),
         source: s.size(s.array(s.size(s.string(), 2, 64)), 0, 5),
         target: s.size(s.array(s.size(s.string(), 2, 64)), 0, RelsMax),
         targetStatus: s.optional(s.size(s.array(s.enums(['', 'Removed', 'Disabled', 'Searching', 'NoSolution'])), 0, RelsMax)),
@@ -110,8 +110,8 @@ exports.auction = function (config = null) {
             return struct
         }
         if (value.reported_at) {
-            return s.defaulted(struct, {decision_from: value.reported_at})
+            return s.defaulted(struct, { decision_from: value.reported_at })
         }
-        return s.defaulted(struct, {decision_from: currentDate.toISOString()})
+        return s.defaulted(struct, { decision_from: currentDate.toISOString() })
     })
 }

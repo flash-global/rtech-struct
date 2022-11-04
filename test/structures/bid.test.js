@@ -251,4 +251,59 @@ describe('Bid object structure', () => {
     expect(val).toBeUndefined()
     expect(err).toHaveProperty('key', 'deDateUtc')
   })
+
+  test('Success: scoring color code feature', () => {
+    const bid = JSON.parse(JSON.stringify(Bids[0]))
+
+    bid.bid_score = 5
+    bid.scoring_process = 'test'
+
+    const [error, entity] = s.validate(bid, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+    expect(entity).toHaveProperty('bid_score')
+    expect(entity.bid_score).toBe(5)
+    expect(entity).toHaveProperty('scoring_process')
+    expect(entity.scoring_process).toBe('test')
+  })
+
+  test('Success: scoring color code feature - at start', () => {
+    const bid = JSON.parse(JSON.stringify(Bids[0]))
+
+    const [error, entity] = s.validate(bid, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+    expect(entity.bid_score).toBeUndefined()
+    expect(entity.scoring_process).toBeUndefined()
+  })
+
+  test('Failed: scoring color code feature - wrong type on bid_score', () => {
+    const bid = JSON.parse(JSON.stringify(Bids[0]))
+
+    bid.bid_score = '5'
+
+    const [error, entity] = s.validate(bid, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(entity).toBeUndefined()
+    expect(error).toBeDefined()
+    expect(error).toHaveProperty('path', ['bid_score'])
+  })
+
+  test('Failed: scoring color code feature - wrong type on scoring_process', () => {
+    const bid = JSON.parse(JSON.stringify(Bids[0]))
+
+    bid.scoring_process = ['test']
+
+    const [error, entity] = s.validate(bid, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(entity).toBeUndefined()
+    expect(error).toBeDefined()
+    expect(error).toHaveProperty('path', ['scoring_process'])
+  })
 })
