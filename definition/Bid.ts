@@ -37,6 +37,8 @@ type Bid = {
     tms: string,
     price: number | string,
     priceDetails?: string[],
+    bid_score?: number,
+    scoring_process?: string,
 };
 
 export default Bid;
