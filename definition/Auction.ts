@@ -7,6 +7,7 @@ type Auction = {
     name: string,
     status: 'created' | 'cancelled' | 'running' | 'completed' | 'expired' | 'failed' | 'searching' | 'searched' | 'validated',
     reported_at: string,
+    is_archived: boolean,
     archived_at?: string,
     tracking_url?: string,
     valid_until: string,
