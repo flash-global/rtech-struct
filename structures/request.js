@@ -9,6 +9,7 @@ const { Reference } = require('./reference')
 const { VirtualOrder } = require('./virtual_order')
 const { MarketplaceSpot } = require('./marketplace_spot')
 const { AgreedPrice } = require('./agreed_price')
+const { AgreedPriceNoPurchase } = require('./agreed_price_no_purchase')
 const { Spot } = require('./spot')
 const { GetItNow } = require('./get_it_now')
 const { ValidityTime } = require('./validity_time')
@@ -25,7 +26,7 @@ const Request = s.object({
     customer_interlocutor: s.optional(CustomerInterlocutor),
     custom_fields: s.optional(s.size(s.array(CustomField), 0, 30)),
     invoice: s.optional(Invoice),
-    order_type:s.optional(s.union([GetItNow, VirtualOrder, MarketplaceSpot, AgreedPrice, Spot])),
+    order_type:s.optional(s.union([GetItNow, VirtualOrder, MarketplaceSpot, AgreedPrice, AgreedPriceNoPurchase, Spot])),
     validity_time: s.optional(ValidityTime),
     issuer: s.optional(NoEmptyString),
     creator: s.optional(NoEmptyString),
