@@ -1,5 +1,5 @@
 type AgreedPriceNoPurchase = {
-    type: 'agreed-price-no-purchase',
+    type: 'no-purchase' | 'agreed-price-without-purchase',
 };
 
 export default AgreedPriceNoPurchase;

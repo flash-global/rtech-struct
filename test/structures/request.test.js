@@ -243,10 +243,21 @@ describe('Request object structure', () => {
         expect(error).toBeUndefined()
     })
 
-    test('Request with order_type agreed-price-no-purchase', () => {
+    test('Request with order_type no-purchase', () => {
         request.order_type=
             {
-                'type': 'agreed-price-no-purchase'
+                'type': 'no-purchase'
+            }
+
+
+        const [error] = s.validate(request, Request, { coerce: true })
+        expect(error).toBeUndefined()
+    })
+
+    test('Request with order_type agreed-price-without-purchase', () => {
+        request.order_type=
+            {
+                'type': 'agreed-price-without-purchase'
             }
 
 
