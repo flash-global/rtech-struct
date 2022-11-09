@@ -399,27 +399,4 @@ describe('Auction object structure', () => {
         expect(error).toBeDefined()
         expect(error).toHaveProperty('key', 'puDateUtc')
     })
-
-    test('Success: is_archived', () => {
-        const auction = JSON.parse(JSON.stringify(Auctions[0]))
-
-        auction.is_archived = true
-        const [error, entity] = s.validate(auction, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(error).toBeUndefined()
-        expect(entity).toHaveProperty('is_archived', true)
-    })
-
-    test('Failed: is_archived - wrong type', () => {
-        const auction = JSON.parse(JSON.stringify(Auctions[0]))
-
-        auction.is_archived = 666
-        const [error, entity] = s.validate(auction, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(entity).toBeUndefined()
-        expect(error).toBeDefined()
-        expect(error).toHaveProperty('key', 'is_archived')
-    })
 })
