@@ -12,6 +12,7 @@ import AgreedPriceNoPurchase from './AgreedPriceNoPurchase';
 import MarketplaceSpot from './MarketplaceSpot';
 import VirtualOrder from './VirtualOrder';
 import ValidityTime from './ValidityTime';
+import LegacyAgreedPrice from "./LegacyAgreedPrice";
 
 type Request = {
     key?: string,
@@ -24,7 +25,7 @@ type Request = {
     customer_interlocutor?: CustomerInterlocutor,
     custom_fields?: CustomField[],
     invoice?: Invoice,
-    order_type?: Spot | AgreedPrice | AgreedPriceNoPurchase | VirtualOrder | MarketplaceSpot | GetItNow ,
+    order_type?: Spot | AgreedPrice | AgreedPriceNoPurchase | VirtualOrder | MarketplaceSpot | GetItNow | LegacyAgreedPrice ,
     validity_time?: ValidityTime,
     issuer?: string,
     creator?: string,
