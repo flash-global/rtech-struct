@@ -38,7 +38,7 @@ type Bid = {
     price: number | string,
     priceDetails?: string[],
     bid_score?: number,
-    scoring_process?: string,
+    bid_score_process?: string,
 };
 
 export default Bid;
