@@ -44,7 +44,7 @@ const dimension = (key, points, packages, defaultOption) => {
 
     if (points.length <= 2) {
         for (const p of packages) {
-            result.push(packages.length.toString())
+            result.push(p.quantity.toString())
             result.push(p.length.toString())
             result.push(p.width.toString())
             result.push(p.height.toString())
