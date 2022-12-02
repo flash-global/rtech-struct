@@ -326,5 +326,28 @@ describe('Bid object structure', () => {
       })
       expect(err0).toBeDefined()
       expect(val0).toBeUndefined()
+  });  
+
+  ['created', 'cancelled', 'running', 'expired', 'declined', 'forwarded', 'authorized', 'approved'].forEach(status => {
+    test(`Success: Bid structure with ${status} as status`, () => {
+      let payload = JSON.parse(JSON.stringify(Bids[0]));
+      payload.status = status;
+      const [err0, val0] = s.validate(payload, BidStruct, {
+        coerce: true, mask: true
+      })
+      expect(err0).toBeUndefined()
+      expect(val0).toBeDefined()
+      expect(val0.status).toStrictEqual(status)
+    })
+  })
+  
+  test('Failed: Bid structure with invalid status value', () => {
+      let payload = JSON.parse(JSON.stringify(Bids[0]));
+      payload.status = 'SOME_WRONG_VALUE';
+      const [err0, val0] = s.validate(payload, BidStruct, {
+          coerce: true, mask: true
+      })
+      expect(err0).toBeDefined()
+      expect(val0).toBeUndefined()
   })
 })

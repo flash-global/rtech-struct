@@ -23,7 +23,7 @@ exports.bid = function (config = null, auction = null) {
             type: s.string(),
             key: s.size(s.string(), 8, 128),
             from: s.size(s.string(), 0, 128),
-            status: s.enums(['created', 'cancelled', 'running', 'expired', 'declined', 'forwarded', 'authorized']),
+            status: s.enums(['created', 'cancelled', 'running', 'expired', 'declined', 'forwarded', 'authorized', 'approved']),
             status_reason: s.optional(s.size(s.string(), 0, 254)),
             reported_at: ZuluDateTimeStruct,
             archived_at: s.optional(ZuluDateTimeStruct),

@@ -3,7 +3,7 @@ type Bid = {
     type: string,
     key: string,
     from: string,
-    status: 'created' | 'cancelled' | 'running' | 'expired' | 'declined' | 'forwarded' | 'authorized',
+    status: 'created' | 'cancelled' | 'running' | 'expired' | 'declined' | 'forwarded' | 'authorized' | 'approved',
     status_reason?: string,
     reported_at: string,
     archived_at?: string,
