@@ -83,17 +83,29 @@ describe('Auction object structure', () => {
         })
         expect(err0).toBeUndefined()
         expect(val0).toBeDefined()
+    });
+  ['SHAQUPLOAD', 'BIDUPLOAD', 'AUTOINVITE', 'BIDCOMMENT', 'NOCHAT', 'LITE', 'PRICE_DETAIL', 'SHOW_CONTACT', 
+  'PKG_V1', 'CLOSE_AFTER_DECISION_FROM', 'SECRET_GETITNOW', 'BID_SCORING_PRICE'].forEach(option => {
+    test(`Success: Default Auction structure with '${option}' as option`, () => {
+      let payload = JSON.parse(JSON.stringify(Auctions[0]));
+      payload.options = [option];
+      const [err0, val0] = s.validate(payload, AuctionStruct, {
+          coerce: true, mask: true
+      })
+      expect(err0).toBeUndefined()
+      expect(val0).toBeDefined()
+      expect(val0.options).toStrictEqual([option])
     })
-    test('Success: Default Auction structure with "ALLOW_EXPIRED_BID_EXTENSION" option', () => {
-        let payload = JSON.parse(JSON.stringify(Auctions[0]));
-        payload.options = ['ALLOW_EXPIRED_BID_EXTENSION'];
-        const [err0, val0] = s.validate(payload, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(err0).toBeUndefined()
-        expect(val0).toBeDefined()
-        expect(val0.options).toStrictEqual(['ALLOW_EXPIRED_BID_EXTENSION'])
-    })
+  })  
+  test('Failed: Default Auction structure with invalid option value', () => {
+      let payload = JSON.parse(JSON.stringify(Auctions[0]));
+      payload.options = ['ALLOW_EXPIRED_BID_EXTENSION'];
+      const [err0, val0] = s.validate(payload, AuctionStruct, {
+          coerce: true, mask: true
+      })
+      expect(err0).toBeDefined()
+      expect(val0).toBeUndefined()
+  })
     test('Success: Default Multistep auction structure', () => {
         const [err0, val0] = s.validate(Auctions[1], AuctionStruct, {
             coerce: true, mask: true
