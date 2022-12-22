@@ -39,7 +39,7 @@ type Bid = {
     priceDetails?: string[],
     bid_score?: number,
     bid_score_process?: string,
-    target_status?: Array<'approved'>,
+    target_status?: Array<'' | 'approved'>,
 };
 
 export default Bid;

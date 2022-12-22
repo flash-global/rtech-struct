@@ -63,7 +63,7 @@ exports.bid = function (config = null, auction = null) {
             deDateRangeUtc: s.optional(dateUtc()),
             bid_score: s.optional(s.number()),
             bid_score_process: s.optional(s.size(s.string(), 2, 254)),
-            target_status: s.optional(s.array(s.enums(['approved'])))
+            target_status: s.optional(s.array(s.enums(['', 'approved'])))
         }), {
             id: require('uuid').v4(),
             key: auction && auction.key ? auction.key : "",
