@@ -305,18 +305,20 @@ describe('Bid object structure', () => {
     expect(entity).toBeUndefined()
     expect(error).toBeDefined()
     expect(error).toHaveProperty('path', ['bid_score_process'])
-  })  
+  });
 
-  test('Success: Bid structure with approved as target_status', () => {
+  ['approved', ''].forEach(status => {
+  test(`Success: Bid structure with ${status} as target_status`, () => {
     let payload = JSON.parse(JSON.stringify(Bids[0]));
-    payload.target_status = ['approved'];
+    payload.target_status = [status];
     const [err0, val0] = s.validate(payload, BidStruct, {
       coerce: true, mask: true
     })
     expect(err0).toBeUndefined()
     expect(val0).toBeDefined()
-    expect(val0.target_status).toStrictEqual(['approved'])
+    expect(val0.target_status).toStrictEqual([status])
   })
+})
   
   test('Failed: Bid structure with invalid target_status value', () => {
       let payload = JSON.parse(JSON.stringify(Bids[0]));
