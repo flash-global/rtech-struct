@@ -1,3 +1,5 @@
+import Auction from './Auction';
+
 type Bid = {
     id: string,
     type: string,
@@ -12,7 +14,7 @@ type Bid = {
     source: string[],
     sourceComment?: string[],
     options?: Array<'ALLOW_EXTEND_ON_EXPIRED'>,
-    target: [],
+    target: string[],
     targetComment?: string[],
     targetRating: number,
     bidRating?: number,
@@ -39,6 +41,7 @@ type Bid = {
     priceDetails?: string[],
     bid_score?: number,
     scoring_process?: string,
+    shaq: Auction,
 };
 
 export default Bid;
