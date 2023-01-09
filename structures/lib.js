@@ -5,12 +5,7 @@ const isoReg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|(\+|\-)\d{2}:?\
 const pReg = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/
 const utcReg = /^(-?(?:[1-9]\d*)?\d{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12]\d)T(2[0-3]|[01]\d):([0-5]\d):([0-5]\d)(\.\d+)?(Z)?$/
 
-exports.zdReg = zdReg;
-exports.isoReg = isoReg;
-exports.pReg = pReg;
-exports.utcReg = utcReg;
-
-exports.ZuluDateTimeStruct = s.define('ZuluDateTimeStruct', (date) => {
+const ZuluDateTimeStruct = s.define('ZuluDateTimeStruct', (date) => {
   try {
     // * Test the regex on the date and only get the datetime group without the µs
     const rgResult = zdReg.exec(date)
@@ -27,7 +22,7 @@ exports.ZuluDateTimeStruct = s.define('ZuluDateTimeStruct', (date) => {
   }
 });
 
-exports.Tz = s.define('Tz', value => {
+const Tz = s.define('Tz', value => {
   try {
     new Intl.DateTimeFormat("en-US", { timeZone: value }).format();
     return true;
@@ -36,30 +31,46 @@ exports.Tz = s.define('Tz', value => {
   }
 })
 
-exports.zouloudate = function (s) {
+const zouloudate = (s) => {
   return s.pattern(s.string(), zdReg)
 }
 
-exports.isodate = function () {
+const isodate = () => {
   return s.pattern(s.string(), isoReg)
 }
 
-exports.dateUtc = function () {
+const dateUtc = () => {
   return s.pattern(s.string(), utcReg)
 }
 
-exports.phone = function (s) {
+const phone = (s) => {
   return s.pattern(s.string(), pReg)
 }
 
-exports.consts = function () {
+const consts = () => {
   return { zdReg, pReg, isoReg }
 }
 
-exports.gpsarray = function (s) {
+const gpsarray = (s) => {
   return s.size(s.array(s.pattern(s.string(), /(-)?\d+\.\d+/)), 0, 2)
 }
 
-exports.gpsstring = function (s) {
+const gpsstring = (s) => {
   return s.pattern(s.string(), /(-)?\d+\.\d+,(-)?\d+\.\d+/)
 }
+
+module.exports = {
+  zdReg,
+  isoReg,
+  pReg,
+  utcReg,
+  ZuluDateTimeStruct,
+  Tz,
+  zouloudate,
+  isodate,
+  dateUtc,
+  phone,
+  consts,
+  gpsarray,
+  gpsstring,
+};
