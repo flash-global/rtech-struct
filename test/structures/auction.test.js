@@ -388,10 +388,12 @@ describe('Auction object structure', () => {
         expect(error).toHaveProperty('key', 'puDateUtc')
     })
 
-    test('Failed: invalid UTC date (ISO string)', () => {
+    test('Failed: invalid UTC date (non-Zulu ISO string)', () => {
         const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
-        auction.puDateUtc = new Date().toISOString()
+        auction.puDateUtc = new Date()
+            .toISOString()
+            .replace('Z', '+00:00');
         const [error, entity] = s.validate(auction, AuctionStruct, {
             coerce: true, mask: true
         })

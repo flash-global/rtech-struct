@@ -228,10 +228,12 @@ describe('Bid object structure', () => {
     expect(err).toHaveProperty('key', 'deDateUtc')
   })
 
-  test('Failed: UTC date invalid (ISO string)', () => {
+  test('Failed: UTC date invalid (non-Zulu ISO string)', () => {
     let payload = JSON.parse(JSON.stringify(Bids[0]));
 
-    payload.deDateUtc = new Date().toISOString()
+    payload.deDateUtc = new Date()
+      .toISOString()
+      .replace('Z', '+00:00');
     const [err, val] = s.validate(payload, BidStruct, {
       coerce: true, mask: true
     })
