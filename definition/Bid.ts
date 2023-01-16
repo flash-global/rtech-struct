@@ -43,6 +43,7 @@ type Bid = {
     bid_score_process?: string,
     target_status?: Array<'' | 'approved'>,
     shaq?: Auction,
+    tags?: string[],
 };
 
 export default Bid;
