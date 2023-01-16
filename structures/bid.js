@@ -63,7 +63,8 @@ exports.bid = function (config = null, auction = null) {
             deDateRangeUtc: s.optional(dateUtc()),
             bid_score: s.optional(s.number()),
             bid_score_process: s.optional(s.size(s.string(), 2, 254)),
-            target_status: s.optional(s.array(s.enums(['', 'approved'])))
+            target_status: s.optional(s.array(s.enums(['', 'approved']))),
+            tags: s.optional(s.array(s.string()))
         }), {
             id: require('uuid').v4(),
             key: auction && auction.key ? auction.key : "",
@@ -89,6 +90,6 @@ exports.bid = function (config = null, auction = null) {
             deDate: auction && auction.deDate ? auction.deDate : new Date().toISOString(),
             deDateRange: auction && auction.deDateRange ? auction.deDateRange : new Date().toISOString(),
             validatorEmails: Validatoremail,
-            logo: Logo,
+            logo: Logo
         })
 }
