@@ -31,7 +31,7 @@ exports.bid = function (config = null, auction = null) {
             options: s.optional(s.array(s.enums(['ALLOW_EXTEND_ON_EXPIRED']))),
             creator: s.size(s.string(), 2, 32),
             source: s.size(s.array(s.size(s.string(), 2, 64)), 0, 5),
-            sourceComment: s.optional(s.size(s.array(s.size(s.string(), 2, 256)), 0, 8)),
+            sourceComment: s.optional(s.size(s.array(s.size(s.string(), 2, 512)), 0, 8)),
             target: s.size(s.array(s.size(s.string(), 2, 64)), 0, 5),
             targetComment: s.optional(s.size(s.array(s.size(s.string(), 2, 256)), 0, 8)),
             targetRating: s.optional(s.size(s.number(), 0, 5)),
