@@ -79,6 +79,7 @@ exports.bid = function (config = null, auction = null) {
             driver: Instance,
             tracker: 'ftk',
             source: [Instance],
+            price: -3.1415,
             score: Score,
             targetRating: Rating,
             target: auction && auction.source ? auction.source : '',

@@ -8,7 +8,7 @@ const { placeChecker } = require('./place')
 const { multistep, packageV2, packageV1 } = require('./multistep')
 const { notes } = require('./notes');
 const Contact = require('./contact').auctionContact;
-// const { bid } = require('./bid');
+const { bid } = require('./bid');
 
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
@@ -18,6 +18,25 @@ exports.auction = function (config = null) {
     if (config && config.app && config.app.usercodename) InstanceName = Instance
     if (config && config.shaq && config.shaq.relsmax) RelsMax = config.shaq.relsmax
     const currentDate = new Date()
+
+    const values = {
+        id: require('uuid').v4(),
+        key: require('uuid').v4(),
+        options: [],
+        creator: 'DEMO',
+        visible: 'private',
+        reported_at: currentDate.toISOString(),
+        valid_until: new Date(new Date(currentDate).setDate(currentDate.getDate() + 1)).toISOString(),
+        valid_from: currentDate.toISOString(),
+        type: 'auction',
+        name: Instance + currentDate.getTime(),
+        status: 'created',
+        currency: 'EUR',
+        source: [Instance],
+        sourceName: [InstanceName],
+        target: [],
+        vehicles: []
+    }
 
     const type = s.type({
         id: s.optional(Uuid),
@@ -78,32 +97,13 @@ exports.auction = function (config = null) {
         stackable: s.optional(s.enums(['yes', 'no', 'No', 'Yes', 0, 1])),
         distance: s.optional(s.union([s.number(), s.string()])),
         notes: notes,
-        // bid: s.optional(bid()),
+        bid: s.optional(bid(config, values)),
         tags: s.defaulted(s.optional(s.array(s.string())), []),
         puDateUtc: s.optional(dateUtc()),
         puDateRangeUtc: s.optional(dateUtc()),
         deDateUtc: s.optional(dateUtc()),
         deDateRangeUtc: s.optional(dateUtc())
     })
-
-    const values = {
-        id: require('uuid').v4(),
-        key: require('uuid').v4(),
-        options: [],
-        creator: 'DEMO',
-        visible: 'private',
-        reported_at: currentDate.toISOString(),
-        valid_until: new Date(new Date(currentDate).setDate(currentDate.getDate() + 1)).toISOString(),
-        valid_from: currentDate.toISOString(),
-        type: 'auction',
-        name: Instance + currentDate.getTime(),
-        status: 'created',
-        currency: 'EUR',
-        source: [Instance],
-        sourceName: [InstanceName],
-        target: [],
-        vehicles: []
-    }
 
     const struct = s.defaulted(type, values)
 
