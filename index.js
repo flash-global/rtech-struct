@@ -54,6 +54,8 @@ exports.Message = () => Message
 
 exports.notes = () => notes
 
+exports.withTags = () => withTags
+
 exports.tools = {
     auction: {
         extractPackageAndStepInformation,
@@ -64,5 +66,4 @@ exports.regex = {
     zdReg,
     isoReg,
     pReg,
-    withTags,
 };
