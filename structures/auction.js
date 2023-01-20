@@ -7,7 +7,7 @@ const GpsS = require('./lib').gpsstring(s)
 const { placeChecker } = require('./place')
 const { multistep, packageV2, packageV1 } = require('./multistep')
 const { notes } = require('./notes');
-const Contact = require('./contact').auctionContact
+const Contact = require('./contact').auctionContact;
 
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
@@ -17,6 +17,25 @@ exports.auction = function (config = null) {
     if (config && config.app && config.app.usercodename) InstanceName = Instance
     if (config && config.shaq && config.shaq.relsmax) RelsMax = config.shaq.relsmax
     const currentDate = new Date()
+
+    const values = {
+        id: require('uuid').v4(),
+        key: require('uuid').v4(),
+        options: [],
+        creator: 'DEMO',
+        visible: 'private',
+        reported_at: currentDate.toISOString(),
+        valid_until: new Date(new Date(currentDate).setDate(currentDate.getDate() + 1)).toISOString(),
+        valid_from: currentDate.toISOString(),
+        type: 'auction',
+        name: Instance + currentDate.getTime(),
+        status: 'created',
+        currency: 'EUR',
+        source: [Instance],
+        sourceName: [InstanceName],
+        target: [],
+        vehicles: []
+    }
 
     const type = s.type({
         id: s.optional(Uuid),
@@ -79,25 +98,6 @@ exports.auction = function (config = null) {
         notes: notes,
         tags: s.defaulted(s.optional(s.array(s.string())), []),
     })
-
-    const values = {
-        id: require('uuid').v4(),
-        key: require('uuid').v4(),
-        options: [],
-        creator: 'DEMO',
-        visible: 'private',
-        reported_at: currentDate.toISOString(),
-        valid_until: new Date(new Date(currentDate).setDate(currentDate.getDate() + 1)).toISOString(),
-        valid_from: currentDate.toISOString(),
-        type: 'auction',
-        name: Instance + currentDate.getTime(),
-        status: 'created',
-        currency: 'EUR',
-        source: [Instance],
-        sourceName: [InstanceName],
-        target: [],
-        vehicles: []
-    }
 
     const struct = s.defaulted(type, values)
 
