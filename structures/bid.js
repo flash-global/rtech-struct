@@ -1,8 +1,7 @@
 const s = require('superstruct')
 const Uuid = s.define('Uuid', require('is-uuid').v4)
-const Url = s.define('Url', require('is-url'))
 const Email = s.define('Email', require('is-email'))
-const {ZuluDateTimeStruct, dateUtc} = require('./lib');
+const { ZuluDateTimeStruct } = require('./lib');
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
 exports.bid = function (config = null, auction = null) {
@@ -31,7 +30,7 @@ exports.bid = function (config = null, auction = null) {
             options: s.optional(s.array(s.enums(['ALLOW_EXTEND_ON_EXPIRED']))),
             creator: s.size(s.string(), 2, 32),
             source: s.size(s.array(s.size(s.string(), 2, 64)), 0, 5),
-            sourceComment: s.optional(s.size(s.array(s.size(s.string(), 2, 256)), 0, 8)),
+            sourceComment: s.optional(s.size(s.array(s.size(s.string(), 2, 512)), 0, 8)),
             target: s.size(s.array(s.size(s.string(), 2, 64)), 0, 5),
             targetComment: s.optional(s.size(s.array(s.size(s.string(), 2, 256)), 0, 8)),
             targetRating: s.optional(s.size(s.number(), 0, 5)),
@@ -57,10 +56,6 @@ exports.bid = function (config = null, auction = null) {
             tms: s.optional(s.string()),
             price: s.union([s.number(), s.string()]),
             priceDetails: s.optional(s.array(s.string())),
-            puDateUtc: s.optional(dateUtc()),
-            puDateRangeUtc: s.optional(dateUtc()),
-            deDateUtc: s.optional(dateUtc()),
-            deDateRangeUtc: s.optional(dateUtc()),
             bid_score: s.optional(s.number()),
             bid_score_process: s.optional(s.size(s.string(), 2, 254)),
             target_status: s.optional(s.array(s.enums(['', 'approved']))),

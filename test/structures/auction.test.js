@@ -338,79 +338,10 @@ describe('Auction object structure', () => {
     test('Success: valid UTC dates', () => {
         const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
-        auction.puDateUtc = '2022-11-03T14:02:21Z'
-        auction.puDateRangeUtc = '2022-11-03T14:02:21Z'
-        auction.deDateUtc = '2022-11-03T14:02:21Z'
-        auction.deDateRangeUtc = '2022-11-03T14:02:21Z'
         const [error, entity] = s.validate(auction, AuctionStruct, {
             coerce: true, mask: true
         })
         expect(entity).toBeDefined()
         expect(error).toBeUndefined()
-    })
-
-    test('Failed: invalid UTC string date', () => {
-        const auction = JSON.parse(JSON.stringify(Auctions[0]))
-
-        auction.puDateUtc = new Date().toUTCString()
-        const [error, entity] = s.validate(auction, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(entity).toBeUndefined()
-        expect(error).toBeDefined()
-        expect(error).toHaveProperty('key', 'puDateUtc')
-    })
-
-    test('Failed: invalid UTC date', () => {
-        const auction = JSON.parse(JSON.stringify(Auctions[0]))
-
-        auction.puDateUtc = '2022-11-03T14:02:21Z'
-        auction.puDateRangeUtc = '2022-11-03T14:02:21Z'
-        auction.deDateUtc = 'blah2022-11-03T14:02:21Z'
-        auction.deDateRangeUtc = '2022-11-03T14:02:21Z'
-        const [error, entity] = s.validate(auction, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(entity).toBeUndefined()
-        expect(error).toBeDefined()
-        expect(error).toHaveProperty('key', 'deDateUtc')
-    })
-
-    test('Failed: invalid UTC date (date Object)', () => {
-        const auction = JSON.parse(JSON.stringify(Auctions[0]))
-
-        auction.puDateUtc = new Date()
-        const [error, entity] = s.validate(auction, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(entity).toBeUndefined()
-        expect(error).toBeDefined()
-        expect(error).toHaveProperty('key', 'puDateUtc')
-    })
-
-    test('Failed: invalid UTC date (non-Zulu ISO string)', () => {
-        const auction = JSON.parse(JSON.stringify(Auctions[0]))
-
-        auction.puDateUtc = new Date()
-            .toISOString()
-            .replace('Z', '+00:00');
-        const [error, entity] = s.validate(auction, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(entity).toBeUndefined()
-        expect(error).toBeDefined()
-        expect(error).toHaveProperty('key', 'puDateUtc')
-    })
-
-    test('Failed: invalid UTC date (other format)', () => {
-        const auction = JSON.parse(JSON.stringify(Auctions[0]))
-
-        auction.puDateUtc = '10/01/2022'
-        const [error, entity] = s.validate(auction, AuctionStruct, {
-            coerce: true, mask: true
-        })
-        expect(entity).toBeUndefined()
-        expect(error).toBeDefined()
-        expect(error).toHaveProperty('key', 'puDateUtc')
     })
 })
