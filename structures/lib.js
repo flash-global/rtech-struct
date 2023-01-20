@@ -3,7 +3,6 @@ const s = require('superstruct')
 const zdReg = /^(?<dateTime>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{3})?Z$/
 const isoReg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|(\+|\-)\d{2}:?\d{2})$/
 const pReg = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/
-const utcReg = /^(-?(?:[1-9]\d*)?\d{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12]\d)T(2[0-3]|[01]\d):([0-5]\d):([0-5]\d)(\.\d+)?(Z)?$/
 
 const ZuluDateTimeStruct = s.define('ZuluDateTimeStruct', (date) => {
   try {
@@ -39,10 +38,6 @@ const isodate = () => {
   return s.pattern(s.string(), isoReg)
 }
 
-const dateUtc = () => {
-  return s.pattern(s.string(), utcReg)
-}
-
 const phone = (s) => {
   return s.pattern(s.string(), pReg)
 }
@@ -63,12 +58,10 @@ module.exports = {
   zdReg,
   isoReg,
   pReg,
-  utcReg,
   ZuluDateTimeStruct,
   Tz,
   zouloudate,
   isodate,
-  dateUtc,
   phone,
   consts,
   gpsarray,
