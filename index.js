@@ -13,6 +13,7 @@ const notification = require('./structures/notification')
 const extractPackageAndStepInformation = require('./tools/auction/extractPackageAndStepInformation')
 const { Message } = require('./structures/message')
 const { notes } = require('./structures/notes')
+const { zdReg, isoReg, pReg } = require('./structures/lib')
 
 exports.address = () => address
 
@@ -56,4 +57,10 @@ exports.tools = {
     auction: {
         extractPackageAndStepInformation,
     },
+};
+
+exports.regex = {
+    zdReg,
+    isoReg,
+    pReg,
 };
