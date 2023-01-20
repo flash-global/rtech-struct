@@ -49,10 +49,6 @@ type Auction = {
     notes?: string,
     bid?: Bid,
     tags: string[],
-    puDateUtc?: string,
-    puDateRangeUtc?: string,
-    deDateUtc?: string,
-    deDateRangeUtc?: string,
 };
 
 export default Auction;

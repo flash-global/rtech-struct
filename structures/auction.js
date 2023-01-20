@@ -8,7 +8,6 @@ const { placeChecker } = require('./place')
 const { multistep, packageV2, packageV1 } = require('./multistep')
 const { notes } = require('./notes');
 const Contact = require('./contact').auctionContact;
-// const { bid } = require('./bid');
 
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
@@ -97,7 +96,6 @@ exports.auction = function (config = null) {
         stackable: s.optional(s.enums(['yes', 'no', 'No', 'Yes', 0, 1])),
         distance: s.optional(s.union([s.number(), s.string()])),
         notes: notes,
-        // bid: s.optional(bid(config, values)),
         tags: s.defaulted(s.optional(s.array(s.string())), []),
     })
 
