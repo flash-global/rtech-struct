@@ -5,7 +5,10 @@ describe('withTags object structure', () => {
   test('Success: withTags structure', () => {
     expect(s.is({}, withTags())).toBeTruthy()
     expect(s.is({ tags: [] }, withTags())).toBeTruthy()
-    expect(s.is({ tags: ['tag-1', 'tag-2'], anotherField: { what: 'ever' } }, withTags())).toBeTruthy()
+    expect(s.is(
+      { tags: ['tag-1', 'tag-2'], anotherField: { what: 'ever' } },
+      withTags(['tag-1', 'tag-2'], 3),
+    )).toBeTruthy()
   })
 
   test('Fail: withTags structure fail', () => {
