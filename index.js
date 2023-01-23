@@ -54,13 +54,7 @@ exports.Message = () => Message
 
 exports.notes = () => notes
 
-exports.withTags = (
-    authorizedTags = [],
-    maxTags = 0,
-) => withTags(
-    authorizedTags,
-    maxTags,
-)
+exports.withTags = config => withTags(config)
 
 exports.tools = {
     auction: {
