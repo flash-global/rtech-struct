@@ -7,7 +7,7 @@ describe('withTags object structure', () => {
     expect(s.is({ tags: [] }, withTags())).toBeTruthy()
     expect(s.is(
       { tags: ['tag-1', 'tag-2'], anotherField: { what: 'ever' } },
-      withTags(['tag-1', 'tag-2'], 3),
+      withTags({ authorizedTags: ['tag-1', 'tag-2'], maxTags: 3 }),
     )).toBeTruthy()
   })
 
@@ -15,5 +15,9 @@ describe('withTags object structure', () => {
     expect(s.is('not an object', withTags())).toBeFalsy()
     expect(s.is({ tags: 'not an array' }, withTags())).toBeFalsy()
     expect(s.is({ tags: ['ok-tag', { tag: 'which is not ok' }] }, withTags())).toBeFalsy()
+    expect(s.is(
+      { tags: ['not listed in config'] },
+      withTags({ authorizedTags: ['these', 'tags', 'are', 'allowed'], maxTags: 42 }),
+    )).toBeFalsy()
   })
 })
