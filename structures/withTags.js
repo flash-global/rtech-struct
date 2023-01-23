@@ -6,11 +6,11 @@ const {
   refine,
 } = require('superstruct');
 
-exports.withTags = (allowedTags = [], maxLength = 0) => {
+exports.withTags = (authorizedTags = [], maxTags = 0) => {
   const cappedArray = refine(
-    array(enums(allowedTags)),
+    array(enums(authorizedTags)),
     'cappedArray',
-    (val) => val.length <= maxLength,
+    (val) => val.length <= maxTags,
   );
   return type({
     tags: optional(cappedArray),
