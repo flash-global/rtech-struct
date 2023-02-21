@@ -49,14 +49,14 @@ const dimension = (key, points, packages, defaultOption) => {
             result.push(p.width.toString())
             result.push(p.height.toString())
             result.push(p.weight.toString())
-            result.push(p.comment || '')
+            result.push(p.stackable ? 'stackable:' + p.stackable : '')
             result.push(
                 p.adr ? (p.adr.class + ',' + p.adr.un_code + ',' + p.adr.packing_group) : ''
             )
             result.push(
                 p.goods_value ?  p.goods_value.value.toString() : ''
             )
-            result.push('')
+            result.push(p.comment || '')
         }
     } else {
         for (const p of packages) {

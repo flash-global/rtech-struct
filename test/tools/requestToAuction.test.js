@@ -117,5 +117,6 @@ describe('request to auction tool', () => {
 
         expect(err).toBeUndefined()
         expect(val).toBeDefined()
+        expect(r.dimension[5]).toStrictEqual('stackable:4')
     })
 })
