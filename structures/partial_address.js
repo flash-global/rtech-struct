@@ -1,5 +1,4 @@
 const s = require('superstruct')
-const { NoEmptyString } = require('./string')
 const { NoEmptyStringPlus } = require('./string_plus')
 const { Tz } = require('./tz_string')
 const { Position } = require('./position')
