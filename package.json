@@ -20,6 +20,7 @@
     "is-email": "^1.0.2",
     "is-url": "^1.2.4",
     "is-uuid": "^1.0.2",
+    "moment-timezone": "^0.5.43",
     "superstruct": "^0.16.0",
     "typescript": "^4.8.2",
     "uuid": "^9.0.0"

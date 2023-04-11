@@ -1,4 +1,5 @@
-import { Position } from './Address';
+import { Position } from "../Position";
+
 
 type VehiclePosition = {
     data: Position
