@@ -39,7 +39,7 @@ const isEmail = (value) => {
   return emailRegex.test(value);
 };
 
-const Email = define('Email', isEmail);
+const Email = s.define('Email', isEmail);
 
 const Tz = s.define('Tz', value => {
   try {
