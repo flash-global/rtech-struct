@@ -1,7 +1,7 @@
-const { literal, object, size, string } = require('superstruct');
+const { enums, object, size, string } = require('superstruct');
 
 const AdminAddressFilter = object({
-  name: literal('QUERY', 'GROUP'),
+  name: enums(['QUERY', 'GROUP']),
   value: size(string(), 1, 256),
 });
 

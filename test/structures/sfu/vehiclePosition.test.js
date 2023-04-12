@@ -1,15 +1,16 @@
-const s = require('superstruct')
-const { vehiclePosition } = require('../../../structures/sfu/vehiclePosition')
+const { vehiclePosition } = require('../../../structures/sfu/vehiclePosition');
+const { assert, is } = require('superstruct');
 
 describe('vehiclePosition object structure', () => {
   test('Success: vehicle position', () => {
-    const [error, entity] = s.validate({
+    const positionData = {
       data: {
         lat: 49.221935,
-        lon: 6.217841
-      }
-    }, vehiclePosition)
+        lon: 6.217841,
+      },
+    };
 
-    expect(error).toBeUndefined()
+    expect(() => assert(positionData, vehiclePosition)).not.toThrow();
+    expect(is(positionData, vehiclePosition)).toBe(true);
   });
-})
+});

@@ -1,8 +1,8 @@
 const s = require('superstruct')
-const { position } = require('./address')
+const { Position } = require('../position');
 
 const VehiclePosition = s.object({
-  data: position
+  data: Position
 })
 
 module.exports = {

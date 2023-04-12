@@ -1,5 +1,5 @@
 const s = require('superstruct')
-const IsoDate = require('../lib').isodate(s)
+const IsoDate = require('../lib').isodate()
 
 const MESSAGE_AT_SIZE_MAX = 256
 

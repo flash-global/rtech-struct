@@ -3,7 +3,7 @@ const { contact } = require('./contact')
 const { address } = require('./address')
 const { TRACKING_ID_SIZE_MIN, TRACKING_ID_SIZE_MAX } = require('./package')
 
-const IsoDate = require('../lib').isodate(s)
+const IsoDate = require('../lib').isodate()
 
 const KEY_SIZE_MIN = 8;
 const KEY_SIZE_MAX = 128;

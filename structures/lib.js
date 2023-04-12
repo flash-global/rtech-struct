@@ -1,5 +1,8 @@
 const s = require('superstruct')
 const moment = require('moment-timezone');
+const isUuid = require('is-uuid');
+
+const Uuid = s.define('Uuid', isUuid.v4);
 
 const zdReg = /^(?<dateTime>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{3})?Z$/
 const isoReg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|(\+|\-)\d{2}:?\d{2})$/
@@ -75,6 +78,7 @@ const gpsstring = (s) => {
 }
 
 module.exports = {
+  Uuid,
   zdReg,
   isoReg,
   pReg,

@@ -1,7 +1,7 @@
-const { array, object, string } = require('superstruct');
+const { array, object, size, string } = require('superstruct');
 
 const InputGroup = object({
-  id: size(string(), 1, 64),
+  id: string(),
   members: array(size(string(), 1, 64))
 });
 

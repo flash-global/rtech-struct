@@ -1,13 +1,13 @@
 const { array, defaulted, object, optional, size, string } = require('superstruct');
-const { v4 } = require('uuid');
-const { Timezone } = require('../../lib');
-const Contact = require('./contact');
-const Position = require('./position');
-const Score = require('./score');
+const { Timezone, Uuid } = require('../../lib');
+const { Contact } = require('./contact');
+const { Position } = require('../../position');
+const { Score } = require('./score');
 const IsoDate = require('../../lib').isodate();
+const { v4: uuidV4 } = require('uuid');
 
 const Address = object({
-  id: defaulted(string(), () => v4()),
+  id: defaulted(Uuid, () => uuidV4()),
   alias: optional(size(string(), 1, 64)),
   street: size(string(), 1, 128),
   additional_street: optional(size(string(), 1, 128)),

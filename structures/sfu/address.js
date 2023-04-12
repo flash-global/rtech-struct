@@ -1,6 +1,6 @@
 const s = require('superstruct');
 const { Tz } = require('../lib');
-const Position = require('../position');
+const { Position } = require('../position');
 
 const STREET_SIZE_MIN = 1;
 const STREET_SIZE_MAX = 128;

@@ -1,7 +1,6 @@
 const s = require('superstruct')
-const Uuid = s.define('Uuid', require('is-uuid').v4)
 const Email = s.define('Email', require('is-email'))
-const { ZuluDateTimeStruct } = require('./lib');
+const { ZuluDateTimeStruct, Uuid } = require('./lib');
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
 exports.bid = function (config = null, auction = null) {

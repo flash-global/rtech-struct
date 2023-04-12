@@ -1,9 +1,5 @@
 const s = require('superstruct')
-const isUuid = require('is-uuid')
-const { ZuluDateTimeStruct } = require('../lib');
-const uuid = require('uuid')
-
-const Uuid = s.define('Uuid', (value) => isUuid.v4(value))
+const { ZuluDateTimeStruct, Uuid } = require('../lib');
 
 const ENTITY_TYPE = 'sfu/event'
 const ENTITY_TYPE_PATTERN = /^(sfu\/event){1}(\/.*)?$/
@@ -15,7 +11,7 @@ const SOURCE_SIZE_MIN = 2;
 const SOURCE_SIZE_MAX = 64;
 
 const Event = s.object({
-  id: s.defaulted(s.optional(Uuid), uuid.v4),
+  id: s.defaulted(s.optional(Uuid), require('uuid').v4),
   type: s.defaulted(s.optional(s.pattern(s.string(), ENTITY_TYPE_PATTERN)), ENTITY_TYPE),
   created_at: s.defaulted(s.optional(ZuluDateTimeStruct), () => (new Date()).toISOString()),
   key: s.size(s.string(), KEY_SIZE_MIN, KEY_SIZE_MAX),
