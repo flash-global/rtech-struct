@@ -15,6 +15,7 @@ const { Message } = require('./structures/message')
 const { notes } = require('./structures/notes')
 const { zdReg, isoReg, pReg } = require('./structures/lib')
 const { withTags } = require('./structures/withTags');
+const addressBookV3 = require('./structures/address-book/v3')
 
 exports.address = () => address
 
@@ -55,6 +56,8 @@ exports.Message = () => Message
 exports.notes = () => notes
 
 exports.withTags = config => withTags(config)
+
+exports.addressBookV3 = () => addressBookV3
 
 exports.tools = {
     auction: {
