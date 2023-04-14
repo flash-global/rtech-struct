@@ -1,7 +1,7 @@
 type State = {
   index: number,
   status: 'SUCCESS' | 'DONE',
-  error: string
+  error?: string
 };
 
 type UploadJobState = {
