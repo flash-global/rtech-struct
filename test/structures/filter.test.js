@@ -46,7 +46,7 @@ describe('Filter object structure', () => {
   test('Fail: Filter structure - wrong id', () => {
     const [error] = s.validate({ id: 'test' }, struct.filter)
 
-    expect(error.message).toStrictEqual('At path: id -- Expected a value of type `uuid`, but received: `"test"`')
+    expect(error.message).toStrictEqual('At path: id -- Expected a value of type `Uuid`, but received: `"test"`')
   })
 
   test('Fail: Filter structure - missing label', () => {

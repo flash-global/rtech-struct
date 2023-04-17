@@ -1,7 +1,6 @@
 const s = require('superstruct')
-const Uuid = s.define('Uuid', require('is-uuid').v4)
 const Url = s.define('Url', require('is-url'))
-const { ZuluDateTimeStruct } = require('./lib');
+const { ZuluDateTimeStruct, Uuid } = require('./lib');
 const GpsA = require('./lib').gpsarray(s)
 const GpsS = require('./lib').gpsstring(s)
 const { placeChecker } = require('./place')

@@ -1,5 +1,5 @@
 const s = require('superstruct')
-const IsoDate = require('../lib').isodate(s)
+const IsoDate = require('../lib').isodate()
 
 const ArrivalAt = s.object({
   arrival_at: IsoDate

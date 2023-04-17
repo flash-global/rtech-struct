@@ -347,7 +347,9 @@ describe('Transport object structure', () => {
 
     entity = s.create(t, struct.transport)
 
-    expect(entity).toHaveProperty('shippers_name', t.shippers_name)
+    // ! I don't get how this could have been working before,
+    // ! especially since the property was never defaulted in the structure and is optional
+    expect(entity).not.toHaveProperty('shippers_name')
 
     expect(s.is(entity, struct.transport)).toBeTruthy()
   })

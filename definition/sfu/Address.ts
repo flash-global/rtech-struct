@@ -1,7 +1,4 @@
-type Position = {
-    lat: number,
-    lon: number,
-};
+import { Position } from "../Position";
 
 type Address = {
     street: string,
@@ -15,5 +12,4 @@ type Address = {
     type: 'sfu/address',
 };
 
-export { Position };
 export default Address;

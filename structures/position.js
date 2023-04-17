@@ -5,6 +5,4 @@ const Position = s.object({
   lon: s.size(s.number(), -180, 180)
 })
 
-module.exports = {
-  Position: Position
-}
+module.exports = { Position }

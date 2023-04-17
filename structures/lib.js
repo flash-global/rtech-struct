@@ -1,4 +1,8 @@
 const s = require('superstruct')
+const moment = require('moment-timezone');
+const isUuid = require('is-uuid');
+
+const Uuid = s.define('Uuid', isUuid.v4);
 
 const zdReg = /^(?<dateTime>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{3})?Z$/
 const isoReg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|(\+|\-)\d{2}:?\d{2})$/
@@ -20,6 +24,25 @@ const ZuluDateTimeStruct = s.define('ZuluDateTimeStruct', (date) => {
     return false
   }
 });
+
+const isTimezone = (value) => {
+  if (typeof value !== 'string') {
+    return false;
+  }
+  return moment.tz.zone(value) !== null;
+};
+
+const Timezone = s.define('Timezone', isTimezone);
+
+const isEmail = (value) => {
+  if (typeof value !== 'string') {
+    return false;
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(value);
+};
+
+const Email = s.define('Email', isEmail);
 
 const Tz = s.define('Tz', value => {
   try {
@@ -55,11 +78,14 @@ const gpsstring = (s) => {
 }
 
 module.exports = {
+  Uuid,
   zdReg,
   isoReg,
   pReg,
   ZuluDateTimeStruct,
   Tz,
+  Timezone,
+  Email,
   zouloudate,
   isodate,
   phone,
