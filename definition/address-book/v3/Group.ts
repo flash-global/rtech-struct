@@ -1,6 +1,6 @@
-type Group = {
-  id: string,
-  members?: string[],
+import InputGroup from "./InputGroup";
+
+type Group = InputGroup & {
   created_at: string,
   updated_at: string
 };

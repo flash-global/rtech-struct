@@ -1,11 +1,8 @@
+import InputContact from './InputContact';
 import Score from './Score';
 
-type Contact = {
+type Contact = InputContact & {
   id: string,
-  company?: string,
-  phone_number?: string,
-  email?: string,
-  name?: string,
   scores?: Score[],
   created_at: string,
   updated_at: string
