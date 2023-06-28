@@ -285,4 +285,16 @@ describe('Bid object structure', () => {
       expect(err0).toBeDefined()
       expect(val0).toBeUndefined()
   })
+
+  test('Success: Bid structure with vehicle', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]));
+
+    payload.vehicle = 'FRG4';
+
+    const [err0, val0] = s.validate(payload, BidStruct, {
+      coerce: true, mask: true
+    })
+    expect(err0).toBeUndefined()
+    expect(val0).toBeDefined()
+  })
 })
