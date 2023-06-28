@@ -28,7 +28,7 @@ type Bid = {
     deDate: string,
     deDateRange: string
     files?: string[],
-    vehicle?: string[],
+    vehicle?: string,
     lang?: string,
     forwarder?: string,
     decision_maker?: string,
