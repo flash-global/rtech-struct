@@ -289,7 +289,7 @@ describe('Bid object structure', () => {
   test('Success: Bid structure with vehicle', () => {
     let payload = JSON.parse(JSON.stringify(Bids[0]));
 
-    payload.vehicle = 'FRG4';
+    payload.vehicule = 'FRG4';
 
     const [err0, val0] = s.validate(payload, BidStruct, {
       coerce: true, mask: true

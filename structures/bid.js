@@ -44,7 +44,7 @@ exports.bid = function (config = null, auction = null) {
             deDate: s.optional(ZuluDateTimeStruct),
             deDateRange: s.optional(ZuluDateTimeStruct),
             files: s.optional(s.array(s.string())),
-            vehicle: s.optional(s.string()),
+            vehicule: s.optional(s.string()),
             lang: s.optional(s.string()),
             forwarder: s.optional(s.string()),
             decision_maker: s.optional(s.string()),
