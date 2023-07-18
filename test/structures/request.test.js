@@ -368,4 +368,29 @@ describe('Request object structure', () => {
         const [error, data] = s.validate(request, Request, { coerce: true })
         expect(error).toBeUndefined()
     })
+
+    test('Request invalid shipper (empty object)', () => {
+        request.shipper = {}
+
+        const [error, data] = s.validate(request, Request)
+        expect(error).toBeDefined()
+    })
+
+    test('Request invalid shipper (minimal length not respected)', () => {
+        request.shipper = {
+            company_name: ''
+        }
+
+        const [error, data] = s.validate(request, Request)
+        expect(error).toBeDefined()
+    })
+
+    test('Request valid shipper', () => {
+        request.shipper = {
+            company_name: 'FORVIA'
+        }
+
+        const [error, data] = s.validate(request, Request)
+        expect(error).toBeUndefined()
+    })
 })
