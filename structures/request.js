@@ -15,6 +15,7 @@ const { Spot } = require('./spot')
 const { GetItNow } = require('./get_it_now')
 const { ValidityTime } = require('./validity_time')
 const { CustomerInterlocutor } = require('./customer_interlocutor')
+const { Shipper } = require('./shipper')
 
 const Request = s.object({
     key: s.optional(NoEmptyString),
@@ -33,6 +34,7 @@ const Request = s.object({
     creator: s.optional(NoEmptyString),
     target: s.optional(s.size(s.array(NoEmptyString), 0, 100)),
     comment: s.optional(s.size(s.string(), 2, 512)),
+    shipper: s.optional(Shipper)
 })
 
 module.exports = {
