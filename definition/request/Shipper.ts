@@ -1,5 +1,5 @@
 type Shipper = {
-    company_name: string,
+    commercial_group: string,
 };
 
 export default Shipper;
