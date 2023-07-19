@@ -376,18 +376,18 @@ describe('Request object structure', () => {
         expect(error).toBeDefined()
     })
 
-    test('Request invalid shipper (minimal length not respected)', () => {
+    test('Request invalid shipper commercial_group (minimal length not respected)', () => {
         request.shipper = {
-            company_name: ''
+            commercial_group: ''
         }
 
         const [error, data] = s.validate(request, Request)
         expect(error).toBeDefined()
     })
 
-    test('Request valid shipper', () => {
+    test('Request valid shipper commercial_group', () => {
         request.shipper = {
-            company_name: 'FORVIA'
+            commercial_group: 'FORVIA'
         }
 
         const [error, data] = s.validate(request, Request)
