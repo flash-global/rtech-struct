@@ -57,7 +57,7 @@ const Transport = s.object({
   destination_point: Point,
   packages_loaded: s.size(s.array(Package), 1, Infinity),
   vehicle: s.size(s.string(), 2, Infinity),
-  vehicle_type: s.size(s.string(), 2, Infinity),
+  vehicle_type: s.size(s.string(), 1, Infinity),
   vehicle_owner: s.optional(s.size(s.string(), 2, Infinity)),
   vehicle_owner_name: s.optional(s.size(s.string(), 2, Infinity)),
   vehicle_tracking_provider: s.optional(s.size(s.string(), 3, Infinity))
