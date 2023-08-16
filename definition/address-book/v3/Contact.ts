@@ -3,7 +3,7 @@ import Score from './Score';
 
 type Contact = InputContact & {
   id: string,
-  scores?: Score[],
+  score: Score,
   created_at: string,
   updated_at: string
 };
