@@ -3,6 +3,7 @@ import Auction from './Auction';
 type Bid = {
     id: string,
     type: string,
+    auction?: string,
     key: string,
     from: string,
     status: 'created' | 'cancelled' | 'running' | 'expired' | 'declined' | 'forwarded' | 'authorized' | 'approved',
