@@ -91,22 +91,44 @@ describe('Transport object structure', () => {
     const [error, entity] = s.validate({}, struct.transport)
 
     for (const failure of error.failures()) {
-      expect(['id', 'type', 'key', 'shippers', 'status', 'timestamp', 'status', 'creator', 'starting_point', 'destination_point', 'packages_loaded', 'vehicle', 'vehicle_type']).toEqual(expect.arrayContaining(failure.path))
+      expect([
+        'id',
+        'type',
+        'key',
+        'shippers',
+        'status',
+        'timestamp',
+        'status',
+        'creator',
+        'starting_point',
+        'destination_point',
+        'packages_loaded',
+        'vehicle',
+        'vehicle_type'
+      ]).toEqual(expect.arrayContaining(failure.path))
     }
   })
 
   test('Fail: key cannot be empty', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        key: ''
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          key: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        key: null
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          key: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.key
 
@@ -116,31 +138,50 @@ describe('Transport object structure', () => {
   test('Fail: shippers cannot be empty', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        shippers: ''
-      }),
-      struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          shippers: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        shippers: []
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          shippers: []
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        shippers: ['']
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          shippers: ['']
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        shippers: [null]
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          shippers: [null]
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        shippers: null
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          shippers: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.shippers
 
@@ -150,15 +191,23 @@ describe('Transport object structure', () => {
   test('Fail: creator cannot be empty', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        creator: ''
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          creator: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        creator: null
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          creator: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.creator
 
@@ -168,15 +217,23 @@ describe('Transport object structure', () => {
   test('Fail: vehicle is mandatory', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle: ''
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle: null
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.vehicle
 
@@ -186,15 +243,23 @@ describe('Transport object structure', () => {
   test('Fail: vehicle_type is mandatory', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_type: ''
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_type: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_type: null
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_type: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.vehicle_type
 
@@ -204,16 +269,23 @@ describe('Transport object structure', () => {
   test('Fail: vehicle_owner is not mandatory', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_owner: ''
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_owner: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_owner: null
-      }
-      ), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_owner: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.vehicle_owner
 
@@ -223,16 +295,23 @@ describe('Transport object structure', () => {
   test('Fail: vehicle_owner_name is not mandatory', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_owner_name: ''
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_owner_name: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_owner_name: null
-      }
-      ), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_owner_name: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.vehicle_owner_name
 
@@ -242,15 +321,23 @@ describe('Transport object structure', () => {
   test('Fail: vehicle_tracking_provider is not mandatory', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_tracking_provider: ''
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_tracking_provider: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        vehicle_tracking_provider: null
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          vehicle_tracking_provider: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.vehicle_tracking_provider
 
@@ -260,20 +347,32 @@ describe('Transport object structure', () => {
   test('Fail: packages_loaded is mandatory and not empty', () => {
     const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        packages_loaded: []
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          packages_loaded: []
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        packages_loaded: null
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          packages_loaded: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        packages_loaded: [{}, {}]
-      }), struct.transport)).toBeFalsy()
+    expect(
+      s.is(
+        Object.assign(t, {
+          packages_loaded: [{}, {}]
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
     delete t.packages_loaded
 

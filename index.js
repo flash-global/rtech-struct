@@ -14,7 +14,7 @@ const extractPackageAndStepInformation = require('./tools/auction/extractPackage
 const { Message } = require('./structures/message')
 const { notes } = require('./structures/notes')
 const { zdReg, isoReg, pReg } = require('./structures/lib')
-const { withTags } = require('./structures/withTags');
+const { withTags } = require('./structures/withTags')
 const addressBookV3 = require('./structures/address-book/v3')
 
 exports.address = () => address
@@ -37,9 +37,9 @@ exports.package = () => packageFn
 
 exports.transport = () => transport
 
-exports.auction = config => auction(config)
+exports.auction = (config) => auction(config)
 
-exports.bid = config => bid(config)
+exports.bid = (config) => bid(config)
 
 exports.filter = () => filter
 
@@ -55,18 +55,18 @@ exports.Message = () => Message
 
 exports.notes = () => notes
 
-exports.withTags = config => withTags(config)
+exports.withTags = (config) => withTags(config)
 
 exports.addressBookV3 = () => addressBookV3
 
 exports.tools = {
-    auction: {
-        extractPackageAndStepInformation,
-    },
-};
+  auction: {
+    extractPackageAndStepInformation
+  }
+}
 
 exports.regex = {
-    zdReg,
-    isoReg,
-    pReg,
-};
+  zdReg,
+  isoReg,
+  pReg
+}

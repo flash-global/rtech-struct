@@ -1,10 +1,10 @@
-const { array, defaulted, object, optional, size, string } = require('superstruct');
-const { Timezone, Uuid } = require('../../lib');
-const { Contact } = require('./contact');
-const { Position } = require('../../position');
-const { Score } = require('./score');
-const IsoDate = require('../../lib').isodate();
-const { v4: uuidV4 } = require('uuid');
+const { array, defaulted, object, optional, size, string } = require('superstruct')
+const { Timezone, Uuid } = require('../../lib')
+const { Contact } = require('./contact')
+const { Position } = require('../../position')
+const { Score } = require('./score')
+const IsoDate = require('../../lib').isodate()
+const { v4: uuidV4 } = require('uuid')
 
 const Address = object({
   id: defaulted(Uuid, () => uuidV4()),
@@ -21,6 +21,6 @@ const Address = object({
   scores: array(Score),
   created_at: IsoDate,
   updated_at: IsoDate
-});
+})
 
 module.exports = { Address }

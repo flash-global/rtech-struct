@@ -7,24 +7,24 @@ const isUuid = require('is-uuid')
 
 const Uuid = s.define('Uuid', (value) => isUuid.v4(value))
 
-const KEY_SIZE_MIN = 8;
-const KEY_SIZE_MAX = 128;
+const KEY_SIZE_MIN = 8
+const KEY_SIZE_MAX = 128
 
-const SOURCE_SIZE_MIN = 2;
-const SOURCE_SIZE_MAX = 64;
+const SOURCE_SIZE_MIN = 2
+const SOURCE_SIZE_MAX = 64
 
-const POINTS_LENGTH_MIN = 2;
-const POINTS_LENGTH_MAX = 50;
+const POINTS_LENGTH_MIN = 2
+const POINTS_LENGTH_MAX = 50
 
-const WAYBILL_SIZE_MIN = 8;
-const WAYBILL_SIZE_MAX = 256;
+const WAYBILL_SIZE_MIN = 8
+const WAYBILL_SIZE_MAX = 256
 
-const INCOTERM_SIZE = 3;
+const INCOTERM_SIZE = 3
 
-const CREATOR_SIZE_MIN = 2;
-const CREATOR_SIZE_MAX = 32;
+const CREATOR_SIZE_MIN = 2
+const CREATOR_SIZE_MAX = 32
 
-const ENTITY_TYPE = 'sfu/transport';
+const ENTITY_TYPE = 'sfu/transport'
 
 const Transport = s.object({
   id: s.defaulted(Uuid, uuidv4),

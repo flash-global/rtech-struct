@@ -5,16 +5,16 @@ const { TRACKING_ID_SIZE_MIN, TRACKING_ID_SIZE_MAX } = require('./package')
 
 const IsoDate = require('../lib').isodate()
 
-const KEY_SIZE_MIN = 8;
-const KEY_SIZE_MAX = 128;
+const KEY_SIZE_MIN = 8
+const KEY_SIZE_MAX = 128
 
-const POINT_TYPE_SIZE_MIN = 2;
-const POINT_TYPE_SIZE_MAX = 32;
+const POINT_TYPE_SIZE_MIN = 2
+const POINT_TYPE_SIZE_MAX = 32
 
-const COMMENT_SIZE_MIN = 1;
-const COMMENT_SIZE_MAX = 256;
+const COMMENT_SIZE_MIN = 1
+const COMMENT_SIZE_MAX = 256
 
-const ENTITY_TYPE = 'sfu/point';
+const ENTITY_TYPE = 'sfu/point'
 
 const Point = s.object({
   key: s.size(s.string(), KEY_SIZE_MIN, KEY_SIZE_MAX),

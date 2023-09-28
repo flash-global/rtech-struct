@@ -16,7 +16,7 @@ const transport = {
       carrier: {
         code: 'CARRIER'
       },
-      drivers:[
+      drivers: [
         {
           phone: '+352 42 42 42',
           name: 'Driver name'
@@ -29,29 +29,31 @@ const transport = {
   waybill: 'https://traking.com/waybill',
   incoterm: 'ABC',
   source: 'Evian',
-  packages: [{
-    owner: 'owner',
-    stackable: 'no',
-    quantity: 1,
-    references: ['ref1', 'ref2'],
-    width: 50,
-    length: 50,
-    height: 50,
-    weight: 3.3,
-    package_type: 'parcel',
-    adr: {
-      un_code: 'un_code',
-      class: '1',
-      packing_group: '2'
-    },
-    comment: 'commentary',
-    good_value: {
-      currency: 'USD',
-      value: 42.42
-    },
-    tracking_id: '17504abf-40ea-4b20-86dd-eb6ff00af325',
-    status: 'waiting_for_pickup'
-  }],
+  packages: [
+    {
+      owner: 'owner',
+      stackable: 'no',
+      quantity: 1,
+      references: ['ref1', 'ref2'],
+      width: 50,
+      length: 50,
+      height: 50,
+      weight: 3.3,
+      package_type: 'parcel',
+      adr: {
+        un_code: 'un_code',
+        class: '1',
+        packing_group: '2'
+      },
+      comment: 'commentary',
+      good_value: {
+        currency: 'USD',
+        value: 42.42
+      },
+      tracking_id: '17504abf-40ea-4b20-86dd-eb6ff00af325',
+      status: 'waiting_for_pickup'
+    }
+  ],
   tracking_url: 'https://traking.com/track',
   points: [
     {
@@ -107,100 +109,116 @@ const transport = {
     }
   ],
   creator: 'DEMO'
-};
+}
 
 describe('Transport object structure', () => {
   test('Success: Transport structure', () => {
     expect(s.is(transport, struct.transport)).toBeTruthy()
-  });
+  })
 
   test('Fail: Transport structure mandatory fields are present', () => {
-    const [error, entity] = s.validate({}, struct.transport);
+    const [error, entity] = s.validate({}, struct.transport)
 
     for (const failure of error.failures()) {
-      expect(['id', 'key', 'packages', 'points', 'source', 'creator']).toEqual(expect.arrayContaining(failure.path));
+      expect(['id', 'key', 'packages', 'points', 'source', 'creator']).toEqual(expect.arrayContaining(failure.path))
     }
-  });
+  })
 
   test('Fail: key cannot be empty', () => {
-    const t = JSON.parse(JSON.stringify(transport));
+    const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        key: ''
-      }), struct.transport)).toBeFalsy();
+    expect(
+      s.is(
+        Object.assign(t, {
+          key: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        key: null
-      }), struct.transport)).toBeFalsy();
+    expect(
+      s.is(
+        Object.assign(t, {
+          key: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    delete t.key;
+    delete t.key
 
-    expect(s.is(t, struct.transport)).toBeFalsy();
-  });
+    expect(s.is(t, struct.transport)).toBeFalsy()
+  })
 
   test('Fail: creator cannot be empty', () => {
-    const t = JSON.parse(JSON.stringify(transport));
+    const t = JSON.parse(JSON.stringify(transport))
 
-    expect(s.is(
-      Object.assign(t, {
-        creator: ''
-      }), struct.transport)).toBeFalsy();
+    expect(
+      s.is(
+        Object.assign(t, {
+          creator: ''
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    expect(s.is(
-      Object.assign(t, {
-        creator: null
-      }), struct.transport)).toBeFalsy();
+    expect(
+      s.is(
+        Object.assign(t, {
+          creator: null
+        }),
+        struct.transport
+      )
+    ).toBeFalsy()
 
-    delete t.creator;
+    delete t.creator
 
-    expect(s.is(t, struct.transport)).toBeFalsy();
-  });
+    expect(s.is(t, struct.transport)).toBeFalsy()
+  })
 
   test('Success: Transport structure id is defaulted to UUID', () => {
-    let t = JSON.parse(JSON.stringify(transport));
-    t.id = 'thisisanid';
+    let t = JSON.parse(JSON.stringify(transport))
+    t.id = 'thisisanid'
 
-    expect(s.is(t, struct.transport)).toBeFalsy();
+    expect(s.is(t, struct.transport)).toBeFalsy()
 
-    delete t.id;
+    delete t.id
 
-    entity = s.create(t, struct.transport);
+    entity = s.create(t, struct.transport)
 
-    expect(entity).toHaveProperty('id');
+    expect(entity).toHaveProperty('id')
 
-    expect(s.is(entity, struct.transport)).toBeTruthy();
-  });
+    expect(s.is(entity, struct.transport)).toBeTruthy()
+  })
 
   test('Success: Transport structure status is defaulted to `planned`', () => {
-    let t = JSON.parse(JSON.stringify(transport));
-    t.status = 'running';
+    let t = JSON.parse(JSON.stringify(transport))
+    t.status = 'running'
 
-    let entity = s.create(t, struct.transport);
+    let entity = s.create(t, struct.transport)
 
-    expect(entity).toHaveProperty('status', 'running');
+    expect(entity).toHaveProperty('status', 'running')
 
-    delete t.status;
+    delete t.status
 
-    entity = s.create(t, struct.transport);
+    entity = s.create(t, struct.transport)
 
-    expect(entity).toHaveProperty('status', 'planned');
+    expect(entity).toHaveProperty('status', 'planned')
 
-    expect(s.is(entity, struct.transport)).toBeTruthy();
-  });
+    expect(s.is(entity, struct.transport)).toBeTruthy()
+  })
 
   test('Fail: wrong type', () => {
     const [error1] = s.validate({ ...transport, type: 'wrong type' }, struct.transport)
 
     expect(error1).toBeInstanceOf(s.StructError)
     expect(error1.path[0]).toBe('type')
-  });
+  })
 
   test('Success: Point structure type is defaulted to point', () => {
     const [error, entity] = s.validate(transport, struct.transport, { coerce: true })
 
     expect(error).toBeUndefined()
     expect(entity.type).toBe('sfu/transport')
-  });
+  })
 })

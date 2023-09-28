@@ -8,5 +8,5 @@ const CustomerInterlocutor = s.object({
 })
 
 module.exports = {
-    CustomerInterlocutor: CustomerInterlocutor
+  CustomerInterlocutor: CustomerInterlocutor
 }

@@ -1,8 +1,8 @@
 const s = require('superstruct')
-const moment = require('moment-timezone');
-const isUuid = require('is-uuid');
+const moment = require('moment-timezone')
+const isUuid = require('is-uuid')
 
-const Uuid = s.define('Uuid', isUuid.v4);
+const Uuid = s.define('Uuid', isUuid.v4)
 
 const zdReg = /^(?<dateTime>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{3})?Z$/
 const isoReg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|(\+|\-)\d{2}:?\d{2})$/
@@ -19,37 +19,37 @@ const ZuluDateTimeStruct = s.define('ZuluDateTimeStruct', (date) => {
 
     // * return the comparison between the formatted date and the datetime group
     // * if the formatted date does not exist, like 30th of February, they will be different
-    return (new Date(date)).toISOString().includes(rgResult.groups.dateTime)
+    return new Date(date).toISOString().includes(rgResult.groups.dateTime)
   } catch (error) {
     return false
   }
-});
+})
 
 const isTimezone = (value) => {
   if (typeof value !== 'string') {
-    return false;
+    return false
   }
-  return moment.tz.zone(value) !== null;
-};
+  return moment.tz.zone(value) !== null
+}
 
-const Timezone = s.define('Timezone', isTimezone);
+const Timezone = s.define('Timezone', isTimezone)
 
 const isEmail = (value) => {
   if (typeof value !== 'string') {
-    return false;
+    return false
   }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(value);
-};
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(value)
+}
 
-const Email = s.define('Email', isEmail);
+const Email = s.define('Email', isEmail)
 
-const Tz = s.define('Tz', value => {
+const Tz = s.define('Tz', (value) => {
   try {
-    new Intl.DateTimeFormat("en-US", { timeZone: value }).format();
-    return true;
+    new Intl.DateTimeFormat('en-US', { timeZone: value }).format()
+    return true
   } catch (e) {
-    return false;
+    return false
   }
 })
 
@@ -91,5 +91,5 @@ module.exports = {
   phone,
   consts,
   gpsarray,
-  gpsstring,
-};
+  gpsstring
+}

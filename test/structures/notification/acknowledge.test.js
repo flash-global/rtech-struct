@@ -8,17 +8,27 @@ describe('Notification object structure', () => {
   const uuid_2 = require('uuid').v4()
 
   test('Success: Acknowledge structure', () => {
-    expect(s.is({
-      name: 'Fast Reader',
-      notificationsIds: [uuid_1, uuid_2]
-    }, acknowledge.structure)).toBeTruthy()
+    expect(
+      s.is(
+        {
+          name: 'Fast Reader',
+          notificationsIds: [uuid_1, uuid_2]
+        },
+        acknowledge.structure
+      )
+    ).toBeTruthy()
 
-    const [err0, val0] = s.validate({
-      name: 'Fast Reader',
-      notificationsIds: [uuid_1, uuid_2]
-    }, acknowledge.structure, {
-      coerce: true, mask: true
-    })
+    const [err0, val0] = s.validate(
+      {
+        name: 'Fast Reader',
+        notificationsIds: [uuid_1, uuid_2]
+      },
+      acknowledge.structure,
+      {
+        coerce: true,
+        mask: true
+      }
+    )
 
     expect(err0).toBeUndefined()
     expect(val0).toBeDefined()
@@ -27,30 +37,45 @@ describe('Notification object structure', () => {
   })
 
   test('Fail: Acknowledge structure fail', () => {
-    let [error] = s.validate({
-      name: 'Fast Reader'
-    }, acknowledge.structure, {
-      coerce: true, mask: true
-    })
+    let [error] = s.validate(
+      {
+        name: 'Fast Reader'
+      },
+      acknowledge.structure,
+      {
+        coerce: true,
+        mask: true
+      }
+    )
 
     expect(error).toHaveProperty('key', 'notificationsIds')
 
-    let [error2] = s.validate({
-      notificationsIds: [uuid_1, uuid_2]
-    }, acknowledge.structure, {
-      coerce: true, mask: true
-    })
+    let [error2] = s.validate(
+      {
+        notificationsIds: [uuid_1, uuid_2]
+      },
+      acknowledge.structure,
+      {
+        coerce: true,
+        mask: true
+      }
+    )
 
     expect(error2).toHaveProperty('key', 'name')
 
-    let [error3] = s.validate({
-      name: 'Fast Reader',
-      notificationsIds: ['bli', 'bla', 'blou']
-    }, acknowledge.structure, {
-      coerce: true, mask: true
-    })
+    let [error3] = s.validate(
+      {
+        name: 'Fast Reader',
+        notificationsIds: ['bli', 'bla', 'blou']
+      },
+      acknowledge.structure,
+      {
+        coerce: true,
+        mask: true
+      }
+    )
 
-    expect(error3).toHaveProperty('path', [ 'notificationsIds', 0 ])
+    expect(error3).toHaveProperty('path', ['notificationsIds', 0])
     expect(error3).toHaveProperty('value', 'bli')
   })
 })
