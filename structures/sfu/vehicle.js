@@ -3,22 +3,22 @@ const { carrier } = require('./carrier')
 const { driver } = require('./driver')
 const { TRACKING_ID_SIZE_MIN, TRACKING_ID_SIZE_MAX } = require('./package')
 
-const TRACKING_PROVIDER_SIZE_MIN = 2;
-const TRACKING_PROVIDER_SIZE_MAX = 32;
+const TRACKING_PROVIDER_SIZE_MIN = 2
+const TRACKING_PROVIDER_SIZE_MAX = 32
 
-const PLATE_SIZE_MIN = 1;
-const PLATE_SIZE_MAX = 64;
+const PLATE_SIZE_MIN = 1
+const PLATE_SIZE_MAX = 64
 
-const VEHICLE_TYPE_SIZE_MIN = 1;
-const VEHICLE_TYPE_SIZE_MAX = 32;
+const VEHICLE_TYPE_SIZE_MIN = 1
+const VEHICLE_TYPE_SIZE_MAX = 32
 
-const INFORMATION_SIZE_MIN = 1;
-const INFORMATION_SIZE_MAX = 128;
+const INFORMATION_SIZE_MIN = 1
+const INFORMATION_SIZE_MAX = 128
 
-const BRAND_SIZE_MIN = 1;
-const BRAND_SIZE_MAX = 128;
+const BRAND_SIZE_MIN = 1
+const BRAND_SIZE_MAX = 128
 
-const ENTITY_TYPE = 'sfu/vehicle';
+const ENTITY_TYPE = 'sfu/vehicle'
 
 const Vehicle = s.object({
   carrier: carrier,
@@ -29,8 +29,8 @@ const Vehicle = s.object({
   type: s.defaulted(s.optional(s.literal(ENTITY_TYPE)), ENTITY_TYPE),
   information: s.optional(s.size(s.string(), INFORMATION_SIZE_MIN, INFORMATION_SIZE_MAX)),
   brand: s.optional(s.size(s.string(), BRAND_SIZE_MIN, BRAND_SIZE_MAX)),
-  packages: s.array(s.size(s.string(), TRACKING_ID_SIZE_MIN, TRACKING_ID_SIZE_MAX)),
-});
+  packages: s.array(s.size(s.string(), TRACKING_ID_SIZE_MIN, TRACKING_ID_SIZE_MAX))
+})
 
 module.exports = {
   vehicle: Vehicle,

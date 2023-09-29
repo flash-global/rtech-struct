@@ -12,16 +12,16 @@ const pointDates = require('./pointDates')
 const vehiclePosition = require('./vehiclePosition')
 
 module.exports = {
-    address,
-    carrier,
-    contact,
-    driver,
-    'package': pck,
-    point,
-    transport,
-    vehicle,
-    event,
-    messageAt,
-    pointDates,
-    vehiclePosition,
+  address,
+  carrier,
+  contact,
+  driver,
+  package: pck,
+  point,
+  transport,
+  vehicle,
+  event,
+  messageAt,
+  pointDates,
+  vehiclePosition
 }

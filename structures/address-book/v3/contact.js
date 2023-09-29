@@ -1,8 +1,8 @@
-const { array, defaulted, object, optional, size, string } = require('superstruct');
-const { Email, Uuid } = require('../../lib');
-const { Score } = require('./score');
-const IsoDate = require('../../lib').isodate();
-const { v4: uuidV4 } = require('uuid');
+const { array, defaulted, object, optional, size, string } = require('superstruct')
+const { Email, Uuid } = require('../../lib')
+const { Score } = require('./score')
+const IsoDate = require('../../lib').isodate()
+const { v4: uuidV4 } = require('uuid')
 
 const Contact = object({
   id: defaulted(Uuid, () => uuidV4()),
@@ -13,6 +13,6 @@ const Contact = object({
   scores: array(Score),
   created_at: IsoDate,
   updated_at: IsoDate
-});
+})
 
 module.exports = { Contact }

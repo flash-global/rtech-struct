@@ -1,7 +1,7 @@
-const { defaulted, object, optional, size, string } = require('superstruct');
-const { Timezone, Uuid } = require('../../lib');
-const { Position } = require('../../position');
-const { v4: uuidV4 } = require('uuid');
+const { defaulted, object, optional, size, string } = require('superstruct')
+const { Timezone, Uuid } = require('../../lib')
+const { Position } = require('../../position')
+const { v4: uuidV4 } = require('uuid')
 
 const InputAddress = object({
   id: defaulted(Uuid, () => uuidV4()),
@@ -14,6 +14,6 @@ const InputAddress = object({
   country: size(string(), 2, 2),
   position: Position,
   timezone: Timezone
-});
+})
 
 module.exports = { InputAddress }

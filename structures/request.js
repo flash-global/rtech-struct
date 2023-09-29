@@ -18,25 +18,27 @@ const { CustomerInterlocutor } = require('./customer_interlocutor')
 const { Shipper } = require('./shipper')
 
 const Request = s.object({
-    key: s.optional(NoEmptyString),
-    source: s.size(s.array(NoEmptyString), 1, 5),
-    packages: s.size(s.array(Package), 0, 50),
-    points: s.size(s.array(PartialPoint), 2, 20),
-    transports: s.size(s.array(RequestedTransport), 1, 10),
-    extras: s.defaulted(s.optional(s.size(s.array(NoEmptyString), 0, 50)), []),
-    references: s.optional(s.size(s.array(Reference), 0, 5)),
-    customer_interlocutor: s.optional(CustomerInterlocutor),
-    custom_fields: s.optional(s.size(s.array(CustomField), 0, 30)),
-    invoice: s.optional(Invoice),
-    order_type:s.optional(s.union([GetItNow, VirtualOrder, MarketplaceSpot, AgreedPrice, AgreedPriceNoPurchase, Spot, LegacyAgreedPrice])),
-    validity_time: s.optional(ValidityTime),
-    issuer: s.optional(NoEmptyString),
-    creator: s.optional(NoEmptyString),
-    target: s.optional(s.size(s.array(NoEmptyString), 0, 100)),
-    comment: s.optional(s.size(s.string(), 2, 512)),
-    shipper: s.optional(Shipper)
+  key: s.optional(NoEmptyString),
+  source: s.size(s.array(NoEmptyString), 1, 5),
+  packages: s.size(s.array(Package), 0, 50),
+  points: s.size(s.array(PartialPoint), 2, 20),
+  transports: s.size(s.array(RequestedTransport), 1, 10),
+  extras: s.defaulted(s.optional(s.size(s.array(NoEmptyString), 0, 50)), []),
+  references: s.optional(s.size(s.array(Reference), 0, 5)),
+  customer_interlocutor: s.optional(CustomerInterlocutor),
+  custom_fields: s.optional(s.size(s.array(CustomField), 0, 30)),
+  invoice: s.optional(Invoice),
+  order_type: s.optional(
+    s.union([GetItNow, VirtualOrder, MarketplaceSpot, AgreedPrice, AgreedPriceNoPurchase, Spot, LegacyAgreedPrice])
+  ),
+  validity_time: s.optional(ValidityTime),
+  issuer: s.optional(NoEmptyString),
+  creator: s.optional(NoEmptyString),
+  target: s.optional(s.size(s.array(NoEmptyString), 0, 100)),
+  comment: s.optional(s.size(s.string(), 2, 512)),
+  shipper: s.optional(Shipper)
 })
 
 module.exports = {
-    Request: Request
+  Request: Request
 }

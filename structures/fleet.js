@@ -7,12 +7,14 @@ const Vehicle = s.defaulted(
     driver: s.size(s.string(), 2, 64),
     provider: s.enums(['ftk', 'shippeo']),
     plate: s.size(s.string(), 2, 32)
-  }), {
-  id: Math.random().toString(36).substring(7),
-  driver: Math.random().toString(36).substring(7),
-  provider: 'ftk',
-  plate: Math.random().toString(36).substring(7)
-})
+  }),
+  {
+    id: Math.random().toString(36).substring(7),
+    driver: Math.random().toString(36).substring(7),
+    provider: 'ftk',
+    plate: Math.random().toString(36).substring(7)
+  }
+)
 
 const Fleet = s.array(Vehicle)
 

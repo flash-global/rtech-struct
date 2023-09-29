@@ -1,25 +1,25 @@
-const s = require('superstruct');
-const { Tz } = require('../lib');
-const { Position } = require('../position');
+const s = require('superstruct')
+const { Tz } = require('../lib')
+const { Position } = require('../position')
 
-const STREET_SIZE_MIN = 1;
-const STREET_SIZE_MAX = 128;
+const STREET_SIZE_MIN = 1
+const STREET_SIZE_MAX = 128
 
-const ADDITIONAL_STREET_SIZE_MIN = 1;
-const ADDITIONAL_STREET_SIZE_MAX = 128;
+const ADDITIONAL_STREET_SIZE_MIN = 1
+const ADDITIONAL_STREET_SIZE_MAX = 128
 
-const CITY_SIZE_MIN = 1;
-const CITY_SIZE_MAX = 64;
+const CITY_SIZE_MIN = 1
+const CITY_SIZE_MAX = 64
 
-const ZIP_CODE_SIZE_MIN = 1;
-const ZIP_CODE_SIZE_MAX = 32;
+const ZIP_CODE_SIZE_MIN = 1
+const ZIP_CODE_SIZE_MAX = 32
 
-const PROVINCE_SIZE_MIN = 1;
-const PROVINCE_SIZE_MAX = 128;
+const PROVINCE_SIZE_MIN = 1
+const PROVINCE_SIZE_MAX = 128
 
-const COUNTRY_SIZE = 2;
+const COUNTRY_SIZE = 2
 
-const ENTITY_TYPE = 'sfu/address';
+const ENTITY_TYPE = 'sfu/address'
 
 const Address = s.object({
   street: s.size(s.string(), STREET_SIZE_MIN, STREET_SIZE_MAX),
@@ -31,7 +31,7 @@ const Address = s.object({
   timezone_string: Tz,
   position: Position,
   type: s.defaulted(s.optional(s.literal(ENTITY_TYPE)), ENTITY_TYPE)
-});
+})
 
 module.exports = {
   address: Address,

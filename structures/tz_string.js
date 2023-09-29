@@ -1,8 +1,8 @@
 const s = require('superstruct')
 
-const Tz = s.define('Tz', value => {
+const Tz = s.define('Tz', (value) => {
   try {
-    new Intl.DateTimeFormat("en-US", { timeZone: value }).format()
+    new Intl.DateTimeFormat('en-US', { timeZone: value }).format()
     return true
   } catch (e) {
     return false
