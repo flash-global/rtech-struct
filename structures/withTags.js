@@ -1,7 +1,7 @@
 const { type, optional, array, enums, number, refine } = require('superstruct')
 
 exports.withTags = (config = {}) => {
-  const authorizedTags = Array.isArray(config.authorizedTags) ? config.authorizedTags : []
+  const authorizedTags = Array.isArray(config?.authorizedTags) ? config.authorizedTags : []
 
   const tagsStruct = array(enums(authorizedTags))
 
