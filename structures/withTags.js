@@ -17,7 +17,7 @@ exports.withTags = (config = {}) => {
 
   // If maxTags is defined, refine the tags structure to ensure its length doesn't exceed maxTags
   const refinedTagsStruct =
-    config.maxTags && typeof config.maxTags === 'number'
+    config?.maxTags && typeof config?.maxTags === 'number'
       ? refine(tagsStruct, 'Max tags exceeded', (tags) => tags.length <= config.maxTags)
       : tagsStruct
 
