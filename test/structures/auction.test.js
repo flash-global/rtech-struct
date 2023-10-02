@@ -494,4 +494,43 @@ describe('Auction object structure', () => {
     expect(entity).toBeDefined()
     expect(error).toBeUndefined()
   })
+
+  test('Success: valid click_and_get_price', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+    auction.click_and_get_price = 666
+
+    const [error, entity] = s.validate(auction, AuctionStruct, {
+      coerce: true,
+      mask: true
+    })
+    expect(entity).toBeDefined()
+    expect(error).toBeUndefined()
+  })
+
+  test('Failed: invalid click_and_get_price (0)', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+    auction.click_and_get_price = 0
+
+    const [error, entity] = s.validate(auction, AuctionStruct, {
+      coerce: true,
+      mask: true
+    })
+    expect(entity).toBeUndefined()
+    expect(error).toBeDefined()
+  })
+
+  test('Failed: invalid click_and_get_price (negative number)', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+    auction.click_and_get_price = -666.666
+
+    const [error, entity] = s.validate(auction, AuctionStruct, {
+      coerce: true,
+      mask: true
+    })
+    expect(entity).toBeUndefined()
+    expect(error).toBeDefined()
+  })
 })
