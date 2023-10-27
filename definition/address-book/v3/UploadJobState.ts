@@ -1,6 +1,6 @@
 type State = {
   index: number,
-  status: 'SUCCESS' | 'DONE',
+  status: 'SUCCESS' | 'FAIL',
   error?: string
 };
 
