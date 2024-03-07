@@ -20,7 +20,7 @@ const Auctions = [
     dimension: ['1', '100', '120', '120', '5', 'no'],
     vehicles: ['van1'],
     distance: '500',
-    notes: 'Nothing',
+    notes: 'N',
     stackable: 'No',
     transport: ['AIR', 'CAR'],
     currency: 'EUR',
