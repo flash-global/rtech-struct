@@ -35,7 +35,7 @@ const Request = s.object({
   issuer: s.optional(NoEmptyString),
   creator: s.optional(NoEmptyString),
   target: s.optional(s.size(s.array(NoEmptyString), 0, 100)),
-  comment: s.optional(s.size(s.string(), 2, 512)),
+  comment: s.optional(s.size(s.string(), 1, 512)),
   shipper: s.optional(Shipper)
 })
 
