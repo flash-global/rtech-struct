@@ -367,4 +367,64 @@ describe('Request object structure', () => {
     const [error, data] = s.validate(request, Request)
     expect(error).toBeUndefined()
   })
+
+  test('Request valid transport vehicles', () => {
+    request.transports = [
+      {
+        way: ['A', 'a', 'b', 'B'],
+        vehicles: [
+          'break',
+          'frg1',
+          'frg2',
+          'frg3',
+          'frg4',
+          'frg4h',
+          'frgr',
+          'pkw',
+          'pl5',
+          'pl9',
+          'semi',
+          'semim',
+          'airfreight',
+          'seafreight',
+          'railfreight'
+        ],
+        distances: [382.871, 100.001]
+      }
+    ]
+
+    const [error, data] = s.validate(request, Request)
+    expect(error).toBeUndefined()
+  })
+
+  test('Request invalid transport vehicles', () => {
+    request.transports = [
+      {
+        way: ['A', 'a', 'b', 'B'],
+        vehicles: [
+          'test1',
+          'test2',
+          'break',
+          'frg1',
+          'frg2',
+          'frg3',
+          'frg4',
+          'frg4h',
+          'frgr',
+          'pkw',
+          'pl5',
+          'pl9',
+          'semi',
+          'semim',
+          'airfreight',
+          'seafreight',
+          'railfreight'
+        ],
+        distances: [382.871, 100.001]
+      }
+    ]
+
+    const [error, data] = s.validate(request, Request)
+    expect(error).toBeDefined()
+  })
 })
