@@ -9,7 +9,12 @@ const Contact = s.object({
   email: s.string(Email)
 })
 
-const AuctionContact = s.tuple([s.size(s.string(), 1, 64), s.size(s.string(), 1, 64), Email, Phone])
+const AuctionContact = s.tuple([
+  s.size(s.string(), 1, 64),
+  s.size(s.string(), 1, 64),
+  Email,
+  s.union([Phone, s.empty(s.string())])
+])
 
 module.exports = {
   contact: Contact,
