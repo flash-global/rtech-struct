@@ -86,10 +86,10 @@ exports.auction = function (config = null) {
     targetStatus: s.optional(
       s.size(s.array(s.enums(['', 'Removed', 'Disabled', 'Searching', 'NoSolution'])), 0, RelsMax)
     ),
-    sourceName: s.optional(s.size(s.array(s.size(s.string(), 2, 128)), 0, 5)),
-    sourceOwner: s.optional(s.size(s.array(s.size(s.string(), 2, 128)), 0, 5)),
-    targetName: s.optional(s.size(s.array(s.size(s.string(), 2, 128)), 0, RelsMax)),
-    targetOwner: s.optional(s.size(s.array(s.size(s.string(), 2, 128)), 0, RelsMax)),
+    sourceName: s.optional(s.size(s.array(s.size(s.string(), 0, 128)), 0, 5)),
+    sourceOwner: s.optional(s.size(s.array(s.size(s.string(), 0, 128)), 0, 5)),
+    targetName: s.optional(s.size(s.array(s.size(s.string(), 0, 128)), 0, RelsMax)),
+    targetOwner: s.optional(s.size(s.array(s.size(s.string(), 0, 128)), 0, RelsMax)),
     currency: s.enums(['EUR', 'DOLLAR']),
     bestbidprice: s.optional(s.number()),
     bestbid: s.optional(Uuid),
@@ -111,7 +111,7 @@ exports.auction = function (config = null) {
     incoterm: s.optional(s.enums(['EXW', 'CIP', 'FCA', 'DAP', 'DPU', 'CPT', 'DDP', 'FAS', 'CFR', 'FOB', 'CIF'])),
     transport: s.optional(s.array(s.string())),
     dimension: s.dynamic((v, p) => {
-      const options = p.branch.map((e) => (e.hasOwnProperty('options') ? e.options : []))[0]
+      const options = p.branch.find((e) => e.hasOwnProperty('options'))?.options || []
       switch (true) {
         case options.includes('MULTISTEP'):
           return multistep(config)
