@@ -508,6 +508,19 @@ describe('Auction object structure', () => {
     expect(error).toBeUndefined()
   })
 
+  test('Success: notes as array', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+
+    auction.notes = [auction.notes]
+
+    const [error, entity] = s.validate(auction, AuctionStruct, {
+      coerce: true,
+      mask: true
+    })
+    expect(entity).toBeDefined()
+    expect(error).toBeUndefined()
+  })
+
   test('Failed: invalid click_and_get_price (0)', () => {
     const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
