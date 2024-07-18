@@ -1,4 +1,5 @@
 const s = require('superstruct')
+const { object } = require('superstruct')
 const AuctionStruct = require('../../structures/auction').auction()
 
 const Auctions = [
@@ -153,6 +154,14 @@ describe('Auction object structure', () => {
     let payload = JSON.parse(JSON.stringify(Auctions[0]))
     payload.options = ['ALLOW_EXPIRED_BID_EXTENSION']
     const [err0, val0] = s.validate(payload, AuctionStruct, {
+      coerce: true,
+      mask: true
+    })
+    expect(err0).toBeDefined()
+    expect(val0).toBeUndefined()
+  })
+  test('Failed: empty auction expected in a subject', () => {
+    const [err0, val0] = s.validate({}, object({ auction: AuctionStruct }), {
       coerce: true,
       mask: true
     })

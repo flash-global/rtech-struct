@@ -133,10 +133,10 @@ exports.auction = function (config = null) {
   const struct = s.defaulted(type, values)
 
   return s.dynamic((value) => {
-    if (value.decision_from) {
+    if (value?.decision_from) {
       return struct
     }
-    if (value.reported_at) {
+    if (value?.reported_at) {
       return s.defaulted(struct, { decision_from: value.reported_at })
     }
     return s.defaulted(struct, { decision_from: currentDate.toISOString() })
