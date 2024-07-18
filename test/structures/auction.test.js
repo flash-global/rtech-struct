@@ -1,6 +1,5 @@
 const s = require('superstruct')
-const { object } = require('superstruct')
-const AuctionStruct = require('../../structures/auction').auction()
+const AuctionStruct = require('../../structures/auction').auction
 
 const Auctions = [
   {
@@ -104,7 +103,7 @@ const auction = {
 
 describe('Auction object structure', () => {
   test('Success: Auction structure', () => {
-    const [err0, val0] = s.validate(auction, AuctionStruct, {
+    const [err0, val0] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -117,7 +116,7 @@ describe('Auction object structure', () => {
     expect(val0.puPlace).toEqual(['630 rue salvadore allende', '57390', 'audin-le-tiche', 'France', 'FR'])
   })
   test('Success: Default Auction structure', () => {
-    const [err0, val0] = s.validate(Auctions[0], AuctionStruct, {
+    const [err0, val0] = s.validate(Auctions[0], AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -141,7 +140,7 @@ describe('Auction object structure', () => {
     test(`Success: Default Auction structure with '${option}' as option`, () => {
       let payload = JSON.parse(JSON.stringify(Auctions[0]))
       payload.options = [option]
-      const [err0, val0] = s.validate(payload, AuctionStruct, {
+      const [err0, val0] = s.validate(payload, AuctionStruct(), {
         coerce: true,
         mask: true
       })
@@ -153,15 +152,15 @@ describe('Auction object structure', () => {
   test('Failed: Default Auction structure with invalid option value', () => {
     let payload = JSON.parse(JSON.stringify(Auctions[0]))
     payload.options = ['ALLOW_EXPIRED_BID_EXTENSION']
-    const [err0, val0] = s.validate(payload, AuctionStruct, {
+    const [err0, val0] = s.validate(payload, AuctionStruct(), {
       coerce: true,
       mask: true
     })
     expect(err0).toBeDefined()
     expect(val0).toBeUndefined()
   })
-  test('Failed: empty auction expected in a subject', () => {
-    const [err0, val0] = s.validate({}, object({ auction: AuctionStruct }), {
+  test('Failed: empty object for an auction expected in a subject', () => {
+    const [err0, val0] = s.validate({}, s.object({ auction: AuctionStruct() }), {
       coerce: true,
       mask: true
     })
@@ -169,7 +168,7 @@ describe('Auction object structure', () => {
     expect(val0).toBeUndefined()
   })
   test('Success: Default Multistep auction structure', () => {
-    const [err0, val0] = s.validate(Auctions[1], AuctionStruct, {
+    const [err0, val0] = s.validate(Auctions[1], AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -179,7 +178,7 @@ describe('Auction object structure', () => {
   let AuctionF1 = JSON.parse(JSON.stringify(Auctions[0]))
   AuctionF1.puContact = ['Doom Center', 'Laurent', 'lav@yoctu.com', 'toto']
   test('Failed: Phone Auction structure', () => {
-    const [err1, val1] = s.validate(AuctionF1, AuctionStruct, {
+    const [err1, val1] = s.validate(AuctionF1, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -190,7 +189,7 @@ describe('Auction object structure', () => {
   let AuctionF2 = JSON.parse(JSON.stringify(Auctions[0]))
   AuctionF2.puContact = ['Doom Center', 'Laurent', 'NA', '0011111111']
   test('Failed: Email Auction structure', () => {
-    const [err2, val2] = s.validate(AuctionF2, AuctionStruct, {
+    const [err2, val2] = s.validate(AuctionF2, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -201,7 +200,7 @@ describe('Auction object structure', () => {
   let AuctionF3 = JSON.parse(JSON.stringify(Auctions[0]))
   ;(AuctionF3.puPlace = ['630 rue salvadore allende', '57390', 'audin-le-tiche', 'France', 'FR', 'Europe/Paris']),
     test('Succes: PuPlace timezone string Auction structure', () => {
-      const [err3, val3] = s.validate(AuctionF3, AuctionStruct, {
+      const [err3, val3] = s.validate(AuctionF3, AuctionStruct(), {
         coerce: true,
         mask: true
       })
@@ -210,7 +209,7 @@ describe('Auction object structure', () => {
   let AuctionF4 = JSON.parse(JSON.stringify(Auctions[0]))
   ;(AuctionF4.puPlace = ['630 rue salvadore allende', '57390', 'audin-le-tiche', 'France', 'FR', 'My/Country']),
     test('Failed: PuPlace unknown timezone string Auction structure', () => {
-      const [err4, val4] = s.validate(AuctionF4, AuctionStruct, {
+      const [err4, val4] = s.validate(AuctionF4, AuctionStruct(), {
         coerce: true,
         mask: true
       })
@@ -221,7 +220,7 @@ describe('Auction object structure', () => {
   AuctionF5.targetOwner = ['ftaggart']
   AuctionF5.sourceOwner = ['llaffer']
   test('Success: target and source Owner Auction structure', () => {
-    const [err5, val5] = s.validate(AuctionF5, AuctionStruct, {
+    const [err5, val5] = s.validate(AuctionF5, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -232,7 +231,7 @@ describe('Auction object structure', () => {
   let AuctionF6 = JSON.parse(JSON.stringify(Auctions[0]))
   delete AuctionF6.puPlace
   test('Failed: missing puPlace auction structure', () => {
-    const [err6, val6] = s.validate(AuctionF6, AuctionStruct, {
+    const [err6, val6] = s.validate(AuctionF6, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -242,7 +241,7 @@ describe('Auction object structure', () => {
 
   let AuctionF7 = JSON.parse(JSON.stringify(Auctions[0]))
   test('Success: Auction with empty extra structure', () => {
-    const [err2, val2] = s.validate(AuctionF7, AuctionStruct, {
+    const [err2, val2] = s.validate(AuctionF7, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -253,7 +252,7 @@ describe('Auction object structure', () => {
   let AuctionF8 = JSON.parse(JSON.stringify(Auctions[0]))
   AuctionF8.extras = ['2ND_DRIVER', 'OTHER_EXTRA']
   test('Success: Auction extra structure', () => {
-    const [err2, val2] = s.validate(AuctionF8, AuctionStruct, {
+    const [err2, val2] = s.validate(AuctionF8, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -265,7 +264,7 @@ describe('Auction object structure', () => {
   let AuctionF9 = JSON.parse(JSON.stringify(Auctions[0]))
   AuctionF9.reported_at = '2022-01-10T13:28:38.566Z'
   test('Success: Auction decision_from structure', () => {
-    const [err9, val9] = s.validate(AuctionF9, AuctionStruct, {
+    const [err9, val9] = s.validate(AuctionF9, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -279,7 +278,7 @@ describe('Auction object structure', () => {
   const AuctionF10 = JSON.parse(JSON.stringify(Auctions[0]))
   AuctionF10.deDate = '2022-02-30T09:05:01.123Z'
   test('Failed: deDate does not exist (30th Feb 22)', () => {
-    const [error, entity] = s.validate(AuctionF10, AuctionStruct, {
+    const [error, entity] = s.validate(AuctionF10, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -293,7 +292,7 @@ describe('Auction object structure', () => {
   AuctionF11.dePlace.push('Europe/Paris')
   AuctionF11.dePlace.push('Appartement 6 42ème étage')
   test('Success: puPlace and dePlace additional address', () => {
-    const [error, entity] = s.validate(AuctionF11, AuctionStruct, {
+    const [error, entity] = s.validate(AuctionF11, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -336,7 +335,7 @@ describe('Auction object structure', () => {
     'insurance'
   ]
   test('Success: dimension PKG_V2 with more than 9 data', () => {
-    const [error, entity] = s.validate(AuctionF12, AuctionStruct, {
+    const [error, entity] = s.validate(AuctionF12, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -367,7 +366,7 @@ describe('Auction object structure', () => {
     'no'
   ]
   test('Success: dimension PKG_V1 with more than 6 data', () => {
-    const [error, entity] = s.validate(AuctionF13, AuctionStruct, {
+    const [error, entity] = s.validate(AuctionF13, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -406,7 +405,7 @@ describe('Auction object structure', () => {
     'insurance'
   ]
   test('Failed: dimension PKG_V2 fail', () => {
-    const [error, entity] = s.validate(AuctionF14, AuctionStruct, {
+    const [error, entity] = s.validate(AuctionF14, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -436,7 +435,7 @@ describe('Auction object structure', () => {
     '5'
   ]
   test('Failed: dimension PKG_V1 fail', () => {
-    const [error, entity] = s.validate(AuctionF15, AuctionStruct, {
+    const [error, entity] = s.validate(AuctionF15, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -447,7 +446,7 @@ describe('Auction object structure', () => {
   test('Success: with default tags', () => {
     const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -459,7 +458,7 @@ describe('Auction object structure', () => {
     const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
     auction.tags = ['THETAG']
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -471,7 +470,7 @@ describe('Auction object structure', () => {
     const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
     auction.tags = 666
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -484,7 +483,7 @@ describe('Auction object structure', () => {
     const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
     auction.tags = ['THETAG', 666]
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -496,7 +495,7 @@ describe('Auction object structure', () => {
   test('Success: valid UTC dates', () => {
     const auction = JSON.parse(JSON.stringify(Auctions[0]))
 
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -509,7 +508,7 @@ describe('Auction object structure', () => {
 
     auction.click_and_get_price = 666
 
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -522,7 +521,7 @@ describe('Auction object structure', () => {
 
     auction.notes = [auction.notes]
 
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -535,7 +534,7 @@ describe('Auction object structure', () => {
 
     auction.click_and_get_price = 0
 
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
@@ -548,7 +547,7 @@ describe('Auction object structure', () => {
 
     auction.click_and_get_price = -666.666
 
-    const [error, entity] = s.validate(auction, AuctionStruct, {
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
       coerce: true,
       mask: true
     })
