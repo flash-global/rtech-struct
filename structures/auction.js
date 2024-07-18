@@ -111,7 +111,7 @@ exports.auction = function (config = null) {
     incoterm: s.optional(s.enums(['EXW', 'CIP', 'FCA', 'DAP', 'DPU', 'CPT', 'DDP', 'FAS', 'CFR', 'FOB', 'CIF'])),
     transport: s.optional(s.array(s.string())),
     dimension: s.dynamic((v, p) => {
-      const options = p.branch.find((e) => e.hasOwnProperty('options'))?.options || []
+      const options = p.branch.find((e) => e?.hasOwnProperty('options'))?.options || []
       switch (true) {
         case options.includes('MULTISTEP'):
           return multistep(config)
