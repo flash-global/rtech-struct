@@ -32,7 +32,7 @@ describe('validate rate2spot object structure from sqs', () => {
     }
     const [error, data] = s.validate(example1, SQSResponseRate2Spot, { coerce: true, mask: true })
     expect(data).toBeUndefined()
-    const failures = structuredClone(error.failures())
+    const failures = error.failures()
     expect(failures).toEqual([
       {
         type: 'string',
