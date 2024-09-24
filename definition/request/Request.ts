@@ -14,6 +14,7 @@ import VirtualOrder from './VirtualOrder';
 import ValidityTime from './ValidityTime';
 import LegacyAgreedPrice from './LegacyAgreedPrice';
 import Shipper from './Shipper';
+import PurchasingExtras from './PurchasingExtras';
 
 type Request = {
     key?: string,
@@ -32,7 +33,8 @@ type Request = {
     creator?: string,
     target?: string[],
     comment?: string,
-    shipper?: Shipper
+    shipper?: Shipper,
+    purchasingExtras?: PurchasingExtras[],
 };
 
 export default Request;
