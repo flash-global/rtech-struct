@@ -4,7 +4,7 @@ const { Currency } = require('./currency')
 
 const Invoice = s.object({
   bill_to: NoEmptyString,
-  currency: Currency
+  currency: s.optional(Currency)
 })
 
 module.exports = {

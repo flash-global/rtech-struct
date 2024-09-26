@@ -160,10 +160,34 @@ describe('Request object structure', () => {
     expect(data).toHaveProperty('extras', [])
   })
 
-  test('Request with invoice', () => {
+  test('Failure: Request invoice with incorrect currency', () => {
+    request.invoice = {
+      currency: 'EUR2'
+    }
+    const [error] = s.validate(request, Request, { coerce: true })
+    expect(error).toBeDefined()
+  })
+
+  test('Failure: Request invoice with empty bill_to field', () => {
+    request.invoice = {
+      bill_to: ''
+    }
+    const [error] = s.validate(request, Request, { coerce: true })
+    expect(error).toBeDefined()
+  })
+
+  test('Success: Request with complete invoice', () => {
     request.invoice = {
       bill_to: '82SKOREWAY2',
       currency: 'EUR'
+    }
+    const [error] = s.validate(request, Request, { coerce: true })
+    expect(error).toBeUndefined()
+  })
+
+  test('Success: Request invoice with mandatory bill_to field', () => {
+    request.invoice = {
+      bill_to: '82SKOREWAY2'
     }
     const [error] = s.validate(request, Request, { coerce: true })
     expect(error).toBeUndefined()
