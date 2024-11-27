@@ -74,7 +74,7 @@ const gpsarray = (s) => {
 }
 
 const gpsstring = (s) => {
-  return s.pattern(s.string(), /(-)?\d+\.\d+,(-)?\d+\.\d+/)
+  return s.pattern(s.string(), /(-)?\d+(\.\d+)?,(-)?\d+(\.\d+)?/)
 }
 
 module.exports = {
