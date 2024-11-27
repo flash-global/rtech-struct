@@ -177,6 +177,24 @@ describe('Transport object structure', () => {
     expect(error3.path[0]).toBe('position')
   })
 
+  test('Success: Geolocalizations can be integer', () => {
+    expect(
+      s.is(
+        {
+          street: '34 Rue Jacques Marjorelle',
+          additional_street: 'en face du 35',
+          city: 'Ennery',
+          zip_code: '57365',
+          country: 'FR',
+          province: 'Moselle',
+          position: '51,5.482',
+          timezone_string: 'Europe/Paris'
+        },
+        struct.address
+      )
+    ).toBeTruthy()
+  })
+
   test('Success: Geolocalizations can be negative', () => {
     expect(
       s.is(
