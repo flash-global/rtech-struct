@@ -335,13 +335,6 @@ describe('Request object structure', () => {
     expect(error).toBeUndefined()
   })
 
-  test('Request with invalid comment', () => {
-    request.comment = ''
-
-    const [error, data] = s.validate(request, Request, { coerce: true })
-    expect(error).toBeDefined()
-  })
-
   test('Request have comment', () => {
     request.comment = 'A'
 
