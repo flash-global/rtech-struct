@@ -10,9 +10,9 @@ const Contact = s.object({
 })
 
 const AuctionContact = s.tuple([
-  s.size(s.string(), 1, 64),
-  s.size(s.string(), 1, 64),
-  Email,
+  s.size(s.string(), 0, 64),
+  s.size(s.string(), 0, 64),
+  s.union([Email, s.empty(s.string())]),
   s.union([Phone, s.empty(s.string())])
 ])
 
