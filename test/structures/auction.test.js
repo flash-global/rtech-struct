@@ -194,7 +194,7 @@ describe('Auction object structure', () => {
       mask: true
     })
     expect(err2).toBeDefined()
-    expect(err2).toHaveProperty('type', 'Email')
+    expect(err2).toHaveProperty('type', 'union')
     expect(val2).toBeUndefined()
   })
   let AuctionF3 = JSON.parse(JSON.stringify(Auctions[0]))
