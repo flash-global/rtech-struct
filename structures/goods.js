@@ -1,10 +1,9 @@
 const s = require('superstruct')
-const { NoEmptyString } = require('./string')
 const { PositiveNumber } = require('./number')
 
 const Goods = s.object({
   value: PositiveNumber,
-  currency: s.optional(NoEmptyString)
+  currency: s.optional(s.string())
 })
 
 module.exports = {
