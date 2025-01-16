@@ -14,7 +14,7 @@ const Package = s.object({
   stackable: s.defaulted(s.optional(s.enums(['no', '1', '2', '3', '4'])), 'no'),
   quantity: s.defaulted(s.optional(PositiveInteger), 1),
   package_type: s.defaulted(s.optional(s.enums(['parcel', 'pallet'])), 'parcel'),
-  references: s.defaulted(s.optional(s.array(NoEmptyString)), []),
+  references: s.defaulted(s.optional(s.array(s.string())), []),
   adr: s.optional(Adr),
   status: s.defaulted(
     s.optional(
