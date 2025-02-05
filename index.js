@@ -8,6 +8,7 @@ const { auction } = require('./structures/auction')
 const { bid } = require('./structures/bid')
 const { filter, filters } = require('./structures/filter')
 const { Request } = require('./structures/request')
+const { RequestV3 } = require('./structures/request_v3')
 const { ValidateSolution } = require('./structures/validate_solution')
 const sfu = require('./structures/sfu')
 const notification = require('./structures/notification')
@@ -52,6 +53,8 @@ exports.sfu = () => sfu
 exports.notification = () => notification
 
 exports.Request = () => Request
+
+exports.RequestV3 = () => RequestV3
 
 exports.ValidateSolution = () => ValidateSolution
 
