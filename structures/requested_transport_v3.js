@@ -18,7 +18,7 @@ const RequestedTransport = s.object({
   distances: s.refine(s.any(), 'Distances', (distances, ctx) => {
     const payload = ctx.branch[0]
 
-    if (payload.transports && payload.transports.length === 1 && payload.transports[0].way.length == 2) {
+    if (Array.isArray(payload.transports) && payload.transports[0].way.length == 2) {
       return distances === undefined || distances.length === 0 || validateDistance(distances)
     }
 

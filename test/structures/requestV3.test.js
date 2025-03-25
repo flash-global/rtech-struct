@@ -538,6 +538,14 @@ describe('Request object structure', () => {
     expect(error).toBeDefined()
   })
 
+  test('Invalid Request without transports', () => {
+    const payload = structuredClone(request)
+    delete payload.transports
+
+    const [error, data] = s.validate(payload, RequestV3)
+    expect(error).toBeDefined()
+  })
+
   test('Request invalid purchasingExtras', () => {
     request.purchasingExtras = [{ stepA: '', stepB: '', currencyAmount: 10 }]
 
