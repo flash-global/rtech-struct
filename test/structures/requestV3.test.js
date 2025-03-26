@@ -443,7 +443,7 @@ describe('Request object structure', () => {
   })
 
   test('Valid transport request with two points and distances', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     payload.transports = [
       {
         way: ['A', 'B'],
@@ -457,7 +457,7 @@ describe('Request object structure', () => {
   })
 
   test('Valid transport request with two points and valid distances', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     payload.transports = [
       {
         way: ['A', 'B'],
@@ -471,7 +471,7 @@ describe('Request object structure', () => {
   })
 
   test('Invalid transport request with two points and zero-distance value', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     payload.transports = [
       {
         way: ['A', 'B'],
@@ -485,7 +485,7 @@ describe('Request object structure', () => {
   })
 
   test('Valid transport request with two points and no distances provided (undefined)', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     payload.transports = [
       {
         way: ['A', 'B'],
@@ -499,7 +499,7 @@ describe('Request object structure', () => {
   })
 
   test('Valid transport request with two points and optional distances (not provided)', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     payload.transports = [
       {
         way: ['A', 'B'],
@@ -512,7 +512,7 @@ describe('Request object structure', () => {
   })
 
   test('Invalid transport request with three points and no distances provided', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     payload.transports = [
       {
         way: ['A', 'a', 'B'],
@@ -525,7 +525,7 @@ describe('Request object structure', () => {
   })
 
   test('Invalid transport request with three points and undefined distances', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     payload.transports = [
       {
         way: ['A', 'a', 'B'],
@@ -539,7 +539,7 @@ describe('Request object structure', () => {
   })
 
   test('Invalid Request without transports', () => {
-    const payload = structuredClone(request)
+    const payload = { ...request }
     delete payload.transports
 
     const [error, data] = s.validate(payload, RequestV3)
