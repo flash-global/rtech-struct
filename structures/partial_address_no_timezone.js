@@ -8,7 +8,7 @@ const PartialAddressNoTimezone = s.object({
   additional_street: s.optional(NoEmptyString),
   city: NoEmptyString,
   country: s.size(s.string(), 2),
-  position: Position,
+  position: s.optional(Position),
   timezone_string: s.optional(Tz),
   zip_code: NoEmptyString,
   instruction: s.optional(NoEmptyString)
