@@ -559,4 +559,10 @@ describe('Request object structure', () => {
     const [error, data] = s.validate(request, RequestV3)
     expect(error).toBeUndefined()
   })
+
+  test('Request creation with optional position', () => {
+    const payload = { ...request, points: request.points.map(({ position, ...rest }) => rest) }
+    const [error, data] = s.validate(payload, RequestV3)
+    expect(error).toBeUndefined()
+  })
 })
