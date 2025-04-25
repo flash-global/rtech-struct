@@ -18,7 +18,7 @@ type Auction = {
     options: Array<'SHAQUPLOAD' | 'BIDUPLOAD' | 'AUTOINVITE' | 'BIDCOMMENT' | 'NOCHAT' | 'LITE' | 'PRICE_DETAIL' | 'SHOW_CONTACT' | 'PKG_V1' | 'PKG_V2' | 'MULTISTEP' | 'CLOSE_AFTER_DECISION_FROM' | 'SECRET_GETITNOW' | 'BID_SCORING_PRICE'>,
     source: string[],
     target: string[],
-    targetStatus?: Array<'' | 'Removed' | 'Disabled' | 'Searching' | 'NoSolution'>,
+    targetStatus?: Array<'' | 'Subscribed' | 'Removed' | 'Disabled' | 'Searching' | 'NoSolution'>,
     sourceName?: string[],
     sourceOwner?: string[],
     targetName?: string[],

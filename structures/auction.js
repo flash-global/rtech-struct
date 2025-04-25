@@ -84,7 +84,7 @@ exports.auction = function (config = null) {
     source: s.size(s.array(s.size(s.string(), 2, 64)), 0, 5),
     target: s.size(s.array(s.size(s.string(), 2, 64)), 0, RelsMax),
     targetStatus: s.optional(
-      s.size(s.array(s.enums(['', 'Removed', 'Disabled', 'Searching', 'NoSolution'])), 0, RelsMax)
+      s.size(s.array(s.enums(['', 'Subscribed', 'Removed', 'Disabled', 'Searching', 'NoSolution'])), 0, RelsMax)
     ),
     sourceName: s.optional(s.size(s.array(s.size(s.string(), 0, 128)), 0, 5)),
     sourceOwner: s.optional(s.size(s.array(s.size(s.string(), 0, 128)), 0, 5)),
