@@ -4,7 +4,7 @@ const { Goods } = require('./goods')
 const { PositiveNumber, PositiveInteger } = require('./number')
 const { NoEmptyString } = require('./string')
 
-const Package = s.type({
+const Package = s.object({
   tracking_id: NoEmptyString,
   owner: NoEmptyString,
   height: PositiveNumber,

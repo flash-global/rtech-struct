@@ -3,7 +3,7 @@ const { NoEmptyString } = require('./string')
 const { Tz } = require('./tz_string')
 const { Position } = require('./position')
 
-const PartialAddress = s.type({
+const PartialAddress = s.object({
   street: s.optional(NoEmptyString),
   additional_street: s.optional(NoEmptyString),
   city: NoEmptyString,
