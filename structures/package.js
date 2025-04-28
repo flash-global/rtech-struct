@@ -35,7 +35,8 @@ const Package = s.object({
     'waiting_for_pickup'
   ),
   comment: s.optional(s.string()),
-  goods_value: s.optional(Goods)
+  goods_value: s.optional(Goods),
+  package_name: s.optional(s.string())
 })
 
 module.exports = {
