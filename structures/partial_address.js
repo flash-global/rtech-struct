@@ -11,10 +11,7 @@ const PartialAddress = s.object({
   position: Position,
   timezone_string: Tz,
   zip_code: NoEmptyString,
-  instruction: s.optional(NoEmptyString),
-  step_address_code: s.optional(s.string()),
-  shipper_address_code: s.optional(s.string()),
-  is_eu: s.optional(s.string())
+  instruction: s.optional(NoEmptyString)
 })
 
 module.exports = {
