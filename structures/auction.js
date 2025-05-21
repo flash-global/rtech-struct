@@ -12,7 +12,7 @@ const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
 exports.auction = function (config = null) {
   let InstanceName = Instance
-  let RelsMax = 10
+  let RelsMax = Infinity
   if (config && config.app && config.app.usercodename) InstanceName = Instance
   if (config && config.shaq && config.shaq.relsmax) RelsMax = config.shaq.relsmax
   const currentDate = new Date()
