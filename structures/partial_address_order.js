@@ -3,7 +3,7 @@ const { NoEmptyString } = require('./string')
 const { Tz } = require('./tz_string')
 const { Position } = require('./position')
 
-const PartialAddress = s.object({
+const PartialAddressOrder = s.type({
   street: s.optional(NoEmptyString),
   additional_street: s.optional(NoEmptyString),
   city: NoEmptyString,
@@ -15,5 +15,5 @@ const PartialAddress = s.object({
 })
 
 module.exports = {
-  PartialAddress: PartialAddress
+  PartialAddressOrder: PartialAddressOrder
 }

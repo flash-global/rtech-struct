@@ -4,7 +4,7 @@ const { Goods } = require('./goods')
 const { PositiveNumber, PositiveInteger } = require('./number')
 const { NoEmptyString } = require('./string')
 
-const Package = s.object({
+const PackageOrder = s.type({
   tracking_id: NoEmptyString,
   owner: NoEmptyString,
   height: PositiveNumber,
@@ -39,5 +39,5 @@ const Package = s.object({
 })
 
 module.exports = {
-  Package: Package
+  PackageOrder: PackageOrder
 }
