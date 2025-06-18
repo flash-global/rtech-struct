@@ -176,14 +176,14 @@ describe('Auction object structure', () => {
     expect(val0).toBeDefined()
   })
   let AuctionF1 = JSON.parse(JSON.stringify(Auctions[0]))
-  AuctionF1.puContact = ['Doom Center', 'Laurent', 'lav@yoctu.com', 'toto']
+  AuctionF1.puContact = ['Doom Center', 'Laurent', 'lav@yoctu.com', 12345]
   test('Failed: Phone Auction structure', () => {
     const [err1, val1] = s.validate(AuctionF1, AuctionStruct(), {
       coerce: true,
       mask: true
     })
     expect(err1).toBeDefined()
-    expect(err1).toHaveProperty('type', 'union')
+    expect(err1).toHaveProperty('type', 'string')
     expect(val1).toBeUndefined()
   })
   let AuctionF2 = JSON.parse(JSON.stringify(Auctions[0]))
