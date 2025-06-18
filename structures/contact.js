@@ -13,7 +13,7 @@ const AuctionContact = s.tuple([
   s.size(s.string(), 0, 64),
   s.size(s.string(), 0, 64),
   s.union([Email, s.empty(s.string())]),
-  s.size(s.string(), 0, Infinity)
+  s.string()
 ])
 
 module.exports = {
