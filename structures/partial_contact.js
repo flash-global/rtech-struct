@@ -1,7 +1,8 @@
 const s = require('superstruct')
+const { isEmail } = require('validator')
 const { NoEmptyString } = require('./string')
 
-const Email = s.define('Email', require('is-email'))
+const Email = s.define('Email', isEmail)
 
 const PartialContact = s.object({
   company_name: s.optional(NoEmptyString),

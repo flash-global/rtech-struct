@@ -1,5 +1,5 @@
 const s = require('superstruct')
-const isEmail = require('is-email')
+const { isEmail } = require('validator')
 
 const Email = s.define('Email', isEmail)
 
