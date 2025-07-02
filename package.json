@@ -17,7 +17,7 @@
     "currency-iso": "^1.0.4",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
-    "is-email": "^1.0.2",
+    "validator": "^13.15.15",
     "is-url": "^1.2.4",
     "is-uuid": "^1.0.2",
     "moment-timezone": "^0.5.43",

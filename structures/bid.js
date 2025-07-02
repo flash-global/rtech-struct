@@ -1,5 +1,15 @@
 const s = require('superstruct')
-const Email = s.define('Email', require('is-email'))
+const { isEmail } = require('validator')
+
+const completeEmailValidation = (value) => {
+  if (Array.isArray(value)) {
+    return value.every(completeEmailValidation)
+  }
+
+  return typeof value === 'string' ? isEmail(value) : false
+}
+
+const Email = s.define('Email', completeEmailValidation)
 const { ZuluDateTimeStruct, Uuid } = require('./lib')
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 

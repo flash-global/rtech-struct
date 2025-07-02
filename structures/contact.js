@@ -1,5 +1,7 @@
+const { isEmail } = require('validator')
+
 const s = require('superstruct')
-const Email = s.define('Email', require('is-email'))
+const Email = s.define('Email', isEmail)
 const Phone = require('./lib').phone(s)
 
 const Contact = s.object({

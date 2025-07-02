@@ -1,5 +1,7 @@
 const s = require('superstruct')
-const Email = s.define('Email', require('is-email'))
+const { isEmail } = require('validator')
+
+const Email = s.define('Email', isEmail)
 
 const CustomerInterlocutor = s.object({
   firstname: s.optional(s.string()),
