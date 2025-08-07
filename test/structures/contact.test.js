@@ -42,3 +42,51 @@ describe('Contact object structure', () => {
     ).toBeFalsy()
   })
 })
+
+describe('Auction Contact object structure', () => {
+  test('Success: auctionContact allows 128 chars for company and name', () => {
+    const value = ['C'.repeat(128), 'N'.repeat(128), 'test@example.com', '0123456789']
+    const [error, result] = s.validate(value, struct.auctionContact)
+    expect(error).toBeUndefined()
+    expect(result).toBeDefined()
+  })
+
+  test('Failed: auctionContact company exceeds 128 chars', () => {
+    const value = ['C'.repeat(129), 'Name', 'test@example.com', '0123456789']
+    const [error, result] = s.validate(value, struct.auctionContact)
+    expect(error).toBeDefined()
+    expect(error).toHaveProperty('key', 0)
+    expect(result).toBeUndefined()
+  })
+
+  test('Failed: auctionContact name exceeds 128 chars', () => {
+    const value = ['Company', 'N'.repeat(129), 'test@example.com', '0123456789']
+    const [error, result] = s.validate(value, struct.auctionContact)
+    expect(error).toBeDefined()
+    expect(error).toHaveProperty('key', 1)
+    expect(result).toBeUndefined()
+  })
+
+  test('Success: auctionContact with empty email', () => {
+    const value = ['Company', 'Name', '', '0123456789']
+    const [error, result] = s.validate(value, struct.auctionContact)
+    expect(error).toBeUndefined()
+    expect(result).toBeDefined()
+  })
+
+  test('Failed: auctionContact with invalid email', () => {
+    const value = ['Company', 'Name', 'not-an-email', '0123456789']
+    const [error, result] = s.validate(value, struct.auctionContact)
+    expect(error).toBeDefined()
+    expect(error).toHaveProperty('key', 2)
+    expect(result).toBeUndefined()
+  })
+
+  test('Failed: auctionContact phone exceeds 64 chars', () => {
+    const value = ['Company', 'Name', 'test@example.com', '9'.repeat(65)]
+    const [error, result] = s.validate(value, struct.auctionContact)
+    expect(error).toBeDefined()
+    expect(error).toHaveProperty('key', 3)
+    expect(result).toBeUndefined()
+  })
+})

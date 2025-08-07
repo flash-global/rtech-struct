@@ -554,4 +554,39 @@ describe('Auction object structure', () => {
     expect(entity).toBeUndefined()
     expect(error).toBeDefined()
   })
+
+  test('Success: puContact company and name accept 128 characters', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    auction.puContact = [
+      'C'.repeat(128), // company
+      'N'.repeat(128), // name
+      'contact@email.com',
+      '+33123456789'
+    ]
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+    expect(entity.puContact[0].length).toBe(128)
+    expect(entity.puContact[1].length).toBe(128)
+  })
+
+  test('Failed: puContact company exceeds 128 characters', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    auction.puContact = [
+      'C'.repeat(129), // company
+      'N'.repeat(129), // name
+      'contact@email.com',
+      '+33123456789'
+    ]
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeDefined()
+    expect(error.path).toEqual(['puContact', 0])
+    expect(entity).toBeUndefined()
+  })
 })
