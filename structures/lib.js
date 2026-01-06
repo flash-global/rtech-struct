@@ -4,7 +4,7 @@ const isUuid = require('is-uuid')
 
 const Uuid = s.define('Uuid', isUuid.v4)
 
-const zdReg = /^(?<dateTime>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{3})?Z$/
+const zdReg = /^(?<dateTime>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{3})?(Z|(\+00:00|\+0000))$/
 const isoReg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|(\+|\-)\d{2}:?\d{2})$/
 const pReg = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/
 
@@ -19,7 +19,7 @@ const ZuluDateTimeStruct = s.define('ZuluDateTimeStruct', (date) => {
 
     // * return the comparison between the formatted date and the datetime group
     // * if the formatted date does not exist, like 30th of February, they will be different
-    return new Date(date).toISOString().includes(rgResult.groups.dateTime)
+    return new Date(date).toISOString().startsWith(rgResult.groups.dateTime)
   } catch (error) {
     return false
   }
