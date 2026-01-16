@@ -2,7 +2,6 @@ import { Position } from "../../Position";
 
 
 type InputAddress = {
-  id?: string,
   alias?: string,
   street: string,
   additional_street?: string,
