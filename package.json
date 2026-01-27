@@ -14,16 +14,16 @@
     "url": "git+https://github.com/yoctu/rtech-struct.git"
   },
   "dependencies": {
-    "currency-iso": "^1.0.4",
+    "currency-codes": "^2.2.0",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
-    "validator": "^13.15.15",
     "is-url": "^1.2.4",
     "is-uuid": "^1.0.2",
     "moment-timezone": "^0.5.43",
     "superstruct": "^1.0.3",
     "typescript": "^5.0.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "validator": "^13.15.15"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",

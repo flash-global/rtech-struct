@@ -589,4 +589,109 @@ describe('Auction object structure', () => {
     expect(error.path).toEqual(['puContact', 0])
     expect(entity).toBeUndefined()
   })
+
+  test('Success: prices_by_currency valid array', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    auction.prices_by_currency = [
+      {
+        currency: 'USD',
+        price: 130,
+        exchange_rate: 1.055
+      },
+      {
+        currency: 'GBP',
+        price: 98.5,
+        exchange_rate: 0.795
+      }
+    ]
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+    expect(entity).toHaveProperty('prices_by_currency')
+    expect(entity.prices_by_currency).toHaveLength(2)
+  })
+
+  test('Success: prices_by_currency optional field', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+  })
+
+  test('Failed: prices_by_currency invalid currency length', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    auction.prices_by_currency = [
+      {
+        currency: 'US',
+        price: 130.00,
+        exchange_rate: 1.055
+      }
+    ]
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
+
+  test('Failed: prices_by_currency invalid price (zero)', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    auction.prices_by_currency = [
+      {
+        currency: 'USD',
+        price: 0,
+        exchange_rate: 1.055
+      }
+    ]
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
+
+  test('Failed: prices_by_currency invalid exchange_rate (negative)', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    auction.prices_by_currency = [
+      {
+        currency: 'USD',
+        price: 130,
+        exchange_rate: -0.5
+      }
+    ]
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
+
+  test('Failed: prices_by_currency missing currency field', () => {
+    const auction = JSON.parse(JSON.stringify(Auctions[0]))
+    auction.prices_by_currency = [
+      {
+        price: 130,
+        exchange_rate: 1.055
+      }
+    ]
+    const [error, entity] = s.validate(auction, AuctionStruct(), {
+      coerce: true,
+      mask: true
+    })
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
 })

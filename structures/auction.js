@@ -7,6 +7,7 @@ const { placeChecker } = require('./place')
 const { multistep, packageV2, packageV1 } = require('./multistep')
 const { notes } = require('./notes')
 const Contact = require('./contact').auctionContact
+const { PricesByCurrency } = require('./prices_by_currency')
 
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
@@ -127,7 +128,8 @@ exports.auction = function (config = null) {
     distance: s.optional(s.union([s.number(), s.string()])),
     notes: notes,
     tags: s.defaulted(s.optional(s.array(s.string())), []),
-    click_and_get_price: s.optional(s.size(s.number(), 1, Infinity))
+    click_and_get_price: s.optional(s.size(s.number(), 1, Infinity)),
+    prices_by_currency: PricesByCurrency
   })
 
   const struct = s.defaulted(type, values)

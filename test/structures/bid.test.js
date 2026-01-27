@@ -324,4 +324,134 @@ describe('Bid object structure', () => {
     expect(err0).toBeUndefined()
     expect(val0).toBeDefined()
   })
+
+  test('Success: prices_by_currency valid array', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]))
+    payload.prices_by_currency = [
+      {
+        currency: 'USD',
+        price: 130.00,
+        exchange_rate: 1.055
+      },
+      {
+        currency: 'GBP',
+        price: 98.50,
+        exchange_rate: 0.795
+      }
+    ]
+
+    const [error, entity] = s.validate(payload, BidStruct, {
+      coerce: true,
+      mask: true
+    })
+
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+    expect(entity).toHaveProperty('prices_by_currency')
+    expect(entity.prices_by_currency).toHaveLength(2)
+  })
+
+  test('Success: prices_by_currency optional field (not provided)', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]))
+    const [error, entity] = s.validate(payload, BidStruct, {
+      coerce: true,
+      mask: true
+    })
+
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+  })
+
+  test('Success: prices_by_currency empty array', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]))
+    payload.prices_by_currency = []
+
+    const [error, entity] = s.validate(payload, BidStruct, {
+      coerce: true,
+      mask: true
+    })
+
+    expect(error).toBeUndefined()
+    expect(entity).toBeDefined()
+    expect(entity.prices_by_currency).toEqual([])
+  })
+
+  test('Failed: prices_by_currency invalid currency length (2 chars)', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]))
+    payload.prices_by_currency = [
+      {
+        currency: 'US',
+        price: 130.00,
+        exchange_rate: 1.055
+      }
+    ]
+
+    const [error, entity] = s.validate(payload, BidStruct, {
+      coerce: true,
+      mask: true
+    })
+
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
+
+  test('Failed: prices_by_currency invalid price (zero)', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]))
+    payload.prices_by_currency = [
+      {
+        currency: 'USD',
+        price: 0,
+        exchange_rate: 1.055
+      }
+    ]
+
+    const [error, entity] = s.validate(payload, BidStruct, {
+      coerce: true,
+      mask: true
+    })
+
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
+
+  test('Failed: prices_by_currency invalid exchange_rate (negative)', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]))
+    payload.prices_by_currency = [
+      {
+        currency: 'USD',
+        price: 130.00,
+        exchange_rate: -0.5
+      }
+    ]
+
+    const [error, entity] = s.validate(payload, BidStruct, {
+      coerce: true,
+      mask: true
+    })
+
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
+
+  test('Failed: prices_by_currency missing currency field', () => {
+    let payload = JSON.parse(JSON.stringify(Bids[0]))
+    payload.prices_by_currency = [
+      {
+        price: 130.00,
+        exchange_rate: 1.055
+      }
+    ]
+
+    const [error, entity] = s.validate(payload, BidStruct, {
+      coerce: true,
+      mask: true
+    })
+
+    expect(error).toBeDefined()
+    expect(error.path).toContain('prices_by_currency')
+    expect(entity).toBeUndefined()
+  })
 })

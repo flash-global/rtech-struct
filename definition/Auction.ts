@@ -49,7 +49,12 @@ type Auction = {
     notes?: string,
     bid?: Bid,
     tags: string[],
-    click_and_get_price?: number
+    click_and_get_price?: number,
+    prices_by_currency?: Array<{
+        currency: string,
+        price: number,
+        exchange_rate: number
+    }>
 };
 
 export default Auction;

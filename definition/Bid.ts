@@ -45,6 +45,11 @@ type Bid = {
     target_status?: Array<'' | 'approved'>,
     shaq?: Auction,
     tags?: string[],
+    prices_by_currency?: Array<{
+        currency: string,
+        price: number,
+        exchange_rate: number
+    }>
 };
 
 export default Bid;
