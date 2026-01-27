@@ -1,10 +1,23 @@
 const s = require('superstruct')
-const { getISOCode } = require('currency-iso')
+const { code, codes } = require('currency-codes')
 
 const Currency = s.define('Currency', (value) => {
-  return typeof getISOCode(value) != 'undefined'
+  if (value == null || typeof value !== 'string') {
+    return false
+  }
+  return code(value) != null
 })
 
+const getCurrencyInfo = (currencyCode) => {
+  return code(currencyCode)
+}
+
+const getAllCurrencies = () => {
+  return codes()
+}
+
 module.exports = {
-  Currency: Currency
+  Currency: Currency,
+  getCurrencyInfo: getCurrencyInfo,
+  getAllCurrencies: getAllCurrencies
 }

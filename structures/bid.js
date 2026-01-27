@@ -11,6 +11,7 @@ const completeEmailValidation = (value) => {
 
 const Email = s.define('Email', completeEmailValidation)
 const { ZuluDateTimeStruct, Uuid } = require('./lib')
+const { PricesByCurrency } = require('./prices_by_currency')
 const Instance = process.env.NODE_APP_INSTANCE || 'DEMO'
 
 exports.bid = function (config = null, auction = null) {
@@ -77,7 +78,8 @@ exports.bid = function (config = null, auction = null) {
       bid_score: s.optional(s.number()),
       bid_score_process: s.optional(s.size(s.string(), 2, 254)),
       target_status: s.optional(s.array(s.enums(['', 'approved']))),
-      tags: s.optional(s.array(s.string()))
+      tags: s.optional(s.array(s.string())),
+      prices_by_currency: PricesByCurrency
     }),
     {
       id: require('uuid').v4(),
